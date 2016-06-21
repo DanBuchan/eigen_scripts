@@ -171,7 +171,7 @@ t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
                                                                   t5_results,
                                                                   t10_results,
                                                                   "genthtop")
-pp.pprint(t1_results)
+# pp.pprint(t1_results)
 
 
 def print_counts(top, data):
