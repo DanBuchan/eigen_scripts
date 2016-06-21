@@ -150,10 +150,10 @@ t1_results = defaultdict(dict)
 t2_results = defaultdict(dict)
 t5_results = defaultdict(dict)
 t10_results = defaultdict(dict)
-pp.pprint(t1_results)
 t1_results, t2_results, t5_results, t10_results = process_results(t1_results, t2_results, t5_results, t10_results, "eigentop")
 t1_results, t2_results, t5_results, t10_results = process_results(t1_results, t2_results, t5_results, t10_results, "hhtop")
 t1_results, t2_results, t5_results, t10_results = process_results(t1_results, t2_results, t5_results, t10_results, "genthtop")
+pp.pprint(t1_results)
 
 def print_counts(top, data):
     output_line = ''
