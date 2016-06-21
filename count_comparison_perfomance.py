@@ -48,7 +48,7 @@ with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_da
 #
 def parse_eigen(omit_from_results_set, scop_list, bench_membership):
     result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/"
-    for file in glob.glob(result_dir+"optimised/*.out"):
+    for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
         print(file)
         results_list = []
         pdb = file[-9:-5]
