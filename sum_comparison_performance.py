@@ -178,7 +178,7 @@ def print_counts(top, data):
     output_line = ''
     for vect_count in sorted(data.items()):
         output_line += top+","+str(vect_count[0])+","
-        data = vect_count[0]
+        data = vect_count[str(vect_count[0])]
         pp.pprint(data)
         output_line += str(round(vect_count[1]["class"]/150, 3))+","
         output_line += str(round(vect_count[1]["fold"]/150, 3))+","
