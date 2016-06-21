@@ -1,0 +1,41 @@
+run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
+run_strsum_eigen.py - runs the eigengthreader tdb generator over a db of pdb and dssp files
+                      Uses the HHSearch_overlap dir as the source of which
+                      files to generate
+run_blast.py - runs blastp over a dir of fasta files
+
+
+Sorting the fold libs:
+diff_chains_list.py - takes list of db files for each method and outputs a file
+                      indicating which pdbs are in all the libraries
+                      joint_chains.txt
+sort_structure_libs.py - takes the list of unified pdbs and moves the files to
+                         the union/overlapping fold recognition dbs
+
+
+Removing homologues from fold libs:
+extract_fasta.py - extracts the fasta files from the HHSearch pdbs
+                   hhsearch.fasta
+remove_homolgues.py - removes the homologues from the fold libs found in the blast run
+find_homologues.py - read the scop classification and identify the SCOP
+                     structural homologues for the PSICOV benchmark set
+
+Process benchmark data:
+count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
+                                 outputs the t1, t2, t5 and t10 performances
+                                 (skipping the immediate structural homologues
+                                 as given by SCOP)
+count_performance.py - work out the t1,t2,t5 and t10 performance for graphing.
+
+draw_benchmark_performance_graph.R - takes the eigenvector performance numbers
+                                     and the distance numbers and plots some
+                                     graphs
+
+count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
+                                 and outputs the best 10 results for each method
+                                 see /processed_comparison
+sum_comparison_performance.py - work out the t1,t2,t5 and t10 performance
+                                  for each method
+
+* count_gdt_perfomance.py - takes the genth, hhsearch and optimal eig models and
+                            calculates the modelling performance
