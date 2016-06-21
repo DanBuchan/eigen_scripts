@@ -10,8 +10,10 @@ from collections import defaultdict
 pp = pprint.PrettyPrinter(indent=4)
 
 
-def process_results(t1_results, t2_results, t5_results, t10_results, file_ending):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/processed_comparison/"
+def process_results(t1_results, t2_results, t5_results, t10_results,
+                    file_ending):
+    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+                 "eigen_thread/results/processed_comparison/"
     pdb_pattern = r"#\sPDB\sID:\s(.+)"
     scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
     result_pattern = r".+,.+,.+"
@@ -43,11 +45,11 @@ def process_results(t1_results, t2_results, t5_results, t10_results, file_ending
     t5_results[param]["family"] = 0
     t10_results[param]["family"] = 0
 
-    #print(result_dir+"*."+file_ending)
+    # print(result_dir+"*."+file_ending)
     for file in glob.glob(result_dir+"*."+file_ending):
-        #print(file)
+        # print(file)
         counts = {}
-        #print(file[-9:])
+        # print(file[-9:])
         result_count = 0
         f1 = open(file, "r")
         class_found = 100
@@ -70,16 +72,20 @@ def process_results(t1_results, t2_results, t5_results, t10_results, file_ending
                 result_count += 1
                 entries = line.split(",")
                 entries = entries[2:]
-                #print(entries)
+                # print(entries)
                 for entry in entries:
                     this_class, this_fold, this_superf, this_family = entry.split(".")
                     if this_class == scop_class and result_count < class_found:
                         class_found = result_count
-                    if this_class == scop_class and this_fold == fold and result_count < fold_found:
+                    if this_class == scop_class and this_fold == fold and \
+                       result_count < fold_found:
                         fold_found = result_count
-                    if this_class == scop_class and this_fold == fold and  this_superf == superf and result_count < superf_found:
+                    if this_class == scop_class and this_fold == fold and \
+                       this_superf == superf and result_count < superf_found:
                         superf_found = result_count
-                    if this_class == scop_class and this_fold == fold and  this_superf == superf and  this_family == family and result_count < family_found:
+                    if this_class == scop_class and this_fold == fold and \
+                       this_superf == superf and this_family == family and \
+                       result_count < family_found:
                         family_found = result_count
 
         if class_found == 1:
@@ -142,7 +148,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results, file_ending
         if family_found <= 10 and family_found > 5:
             t10_results[param]["family"] += 1
 
-        #break
+        # break
     return(t1_results, t2_results, t5_results, t10_results)
 
 
@@ -150,20 +156,33 @@ t1_results = defaultdict(dict)
 t2_results = defaultdict(dict)
 t5_results = defaultdict(dict)
 t10_results = defaultdict(dict)
-t1_results, t2_results, t5_results, t10_results = process_results(t1_results, t2_results, t5_results, t10_results, "eigentop")
-t1_results, t2_results, t5_results, t10_results = process_results(t1_results, t2_results, t5_results, t10_results, "hhtop")
-t1_results, t2_results, t5_results, t10_results = process_results(t1_results, t2_results, t5_results, t10_results, "genthtop")
+t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
+                                                                  t2_results,
+                                                                  t5_results,
+                                                                  t10_results,
+                                                                  "eigentop")
+t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
+                                                                  t2_results,
+                                                                  t5_results,
+                                                                  t10_results,
+                                                                  "hhtop")
+t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
+                                                                  t2_results,
+                                                                  t5_results,
+                                                                  t10_results,
+                                                                  "genthtop")
 pp.pprint(t1_results)
+
 
 def print_counts(top, data):
     output_line = ''
     for vect_count in sorted(data.items()):
-            output_line += top+","+str(vect_count[0])+","
-            output_line += str(vect_count[1]["class"]/150)+","
-            output_line += str(round(vect_count[1]["fold"]/150, 3))+","
-            output_line += str(round(vect_count[1]["superf"]/150, 3))+","
-            output_line += str(round(vect_count[1]["family"]/150, 3))
-            output_line += "\n"
+        output_line += top+","+str(vect_count[0])+","
+        output_line += str(round(vect_count[1]["class"]/150, 3))+","
+        output_line += str(round(vect_count[1]["fold"]/150, 3))+","
+        output_line += str(round(vect_count[1]["superf"]/150, 3))+","
+        output_line += str(round(vect_count[1]["family"]/150, 3))
+        output_line += "\n"
     print(output_line.rstrip())
 print("top,vectors,class,fold,superf,family")
 print_counts("1", t1_results)
