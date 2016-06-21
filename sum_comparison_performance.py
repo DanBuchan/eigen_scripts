@@ -164,7 +164,7 @@ def print_counts(top, data):
             output_line += str(round(vect_count[1]["superf"]/150, 3))+","
             output_line += str(round(vect_count[1]["family"]/150, 3))
             output_line += "\n"
-    print(output_line.rstrip())
+    #print(output_line.rstrip())
 print("top,vectors,class,fold,superf,family")
 print_counts("1", t1_results)
 print_counts("2", t2_results)
