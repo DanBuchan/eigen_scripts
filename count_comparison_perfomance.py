@@ -8,11 +8,12 @@ pp = pprint.PrettyPrinter(indent=4)
 omit_from_results_set = {}
 omit_from_results_set_pdb = {}
 
-with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_data/non_redundant_list.txt") as non_redundant:
+with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
+          "scop_data/non_redundant_list.txt") as non_redundant:
     for line in non_redundant:
         line = line.rstrip()
         omit_from_results_set[line] = 1
-        omit_from_results_set_pdb[line[1:5]+line[5:6].upper()]=1
+        omit_from_results_set_pdb[line[1:5]+line[5:6].upper()] = 1
 
 
 # pp.pprint(omit_from_results_set_pdb)
@@ -21,10 +22,11 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_da
 # get the list of scop folds
 scop_list = {}
 pdb_list = {}
-with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_data/pdb_scop_class.txt") as scop_list_file:
+with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
+          "scop_data/pdb_scop_class.txt") as scop_list_file:
     reader = csv.reader(scop_list_file, delimiter=',', quotechar='"')
     for row in reader:
-        #print(row)
+        # print(row)
         scop_list[row[0]] = r".".join(row[1].split(".")[:-2])
         pdb = row[0][1:5]
         chain = row[0][5:6].upper()
@@ -39,7 +41,8 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_da
 # exit()
 
 bench_membership = {}
-with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_data/benchmark_family_members.txt') as benchfile:
+with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/'
+          'scop_data/benchmark_family_members.txt') as benchfile:
     reader = csv.reader(benchfile, delimiter=',', quotechar='"')
     for row in reader:
         bench_membership[row[0]] = r".".join(row[1].split(".")[:-2])
@@ -48,9 +51,11 @@ with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_da
 # exit()
 
 # Parse eigenresults
-#
+
+
 def parse_eigen(omit_from_results_set, scop_list, bench_membership):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/"
+    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+                 "eigen_thread/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
         print(file)
         results_list = []
@@ -61,7 +66,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
         print(pdb_id)
         if pdb_id in bench_membership:
             print(result_dir+"processed_comparison/"+pdb_id+".eigentop")
-            out = open(result_dir+"processed_comparison/"+pdb_id+".eigentop", "w+")
+            out = open(result_dir+"processed_comparison/"+pdb_id+".eigentop",
+                       "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
         #     # print(file)
@@ -87,8 +93,10 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
         else:
             continue
 
+
 def parse_hh(omit_from_results_set, scop_list, bench_membership):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/"
+    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0" \
+                 "/eigen_thread/results/"
     start_parse_pattern = r"^\sNo\sHit"
     start_parse_re = re.compile(start_parse_pattern)
     end_parse_pattern = r"^No\s1"
@@ -138,7 +146,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                             results_list.append(result_array)
                     if start_parse_result:
                         parse_ctl = True
-                #pp.pprint(results_list)
+                # pp.pprint(results_list)
                 results = []
                 if len(results_list) > 10:
                     results = results_list[0:10]
@@ -151,8 +159,11 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
             continue
         # break
 
+
 def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/"
+    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+                 "eigen_thread/results/"
+    # print("hi")
     for file in glob.glob(result_dir+"genthreader_results/*.pgen.presults"):
         print(file)
         results_list = []
@@ -163,7 +174,8 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         print(pdb_id)
         if pdb_id in bench_membership:
             print(result_dir+"processed_comparison/"+pdb_id+".genthtop")
-            out = open(result_dir+"processed_comparison/"+pdb_id+".genthtop", "w+")
+            out = open(result_dir+"processed_comparison/"+pdb_id+".genthtop",
+                       "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
             # print(file)

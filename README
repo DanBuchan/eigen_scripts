@@ -19,7 +19,22 @@ extract_fasta.py - extracts the fasta files from the HHSearch pdbs
 remove_homolgues.py - removes the homologues from the fold libs found in the blast run
 find_homologues.py - read the scop classification and identify the SCOP
                      structural homologues for the PSICOV benchmark set
+                     pdb_scop_class.txt: pdb Domain ID to SCOP class for ALL
+                                         classified pdb chains
+                     scop_class_members.txt: SCOP class to a list of domains
+                                             included in that class
+                     scop_superfamil_members.txt: SCOP superfamily to list of
+                                                  domain ids
+                     non_redundant_list.txt: A list of all the benchmark pdb
+                                             ids AND ids of their immediate
+                                             homologues
+                    non_redundant_list_superfamily.txt: as above but
+                                                        superfamily members
+                    benchmark_family_members.txt : scop family members for the
 
+                    benchmark_superfamily_members.txt :
+                    benchmark_domain_id.txt : scop domain IDS for the benchmark
+                                              set
 Process benchmark data:
 count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
                                  outputs the t1, t2, t5 and t10 performances
