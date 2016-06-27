@@ -186,10 +186,15 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
             out = open(result_dir+"processed_comparison/"+pdb_id+".genthtop",
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
+            scop_class = bench_membership[pdb_id]
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
             # print(file)
             with open(file) as genthresult:
                 lines = genthresult.read().splitlines()
+
+                scop_3_levels = ".".join(scop_class.split(".")[:-1])
+                this_3_levels = ".".join(scop_list[entries[9][0:5]].split(".")[:-1])
+
                 for line in lines:
                     entries = line.split()
         #            print(entries)
