@@ -47,7 +47,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
 
     # print(result_dir+"*."+file_ending)
     for file in glob.glob(result_dir+"*."+file_ending):
-        # print(file)
+        print(file)
         counts = {}
         # print(file[-9:])
         result_count = 0
@@ -67,14 +67,18 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
                 this_pdb = pdb_result.group(1)
             elif(scop_result):
                 this_scop_class = scop_result.group(1)
-                scop_class, fold, superf, family = this_scop_class.split(".")
+                # print(this_scop_class)
+                scop_class, fold = this_scop_class.split(".")
             elif(line_result):
                 result_count += 1
                 entries = line.split(",")
                 entries = entries[2:]
                 # print(entries)
                 for entry in entries:
-                    this_class, this_fold, this_superf, this_family = entry.split(".")
+                    this_superf = 0
+                    this_family = 0
+                    print(entry)
+                    this_class, this_fold = entry.split(".")
                     if this_class == scop_class and result_count < class_found:
                         class_found = result_count
                     if this_class == scop_class and this_fold == fold and \

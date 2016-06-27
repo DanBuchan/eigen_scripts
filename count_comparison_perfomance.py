@@ -7,15 +7,6 @@ pp = pprint.PrettyPrinter(indent=4)
 
 omit_from_results_set = {}
 omit_from_results_set_pdb = {}
-
-with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
-          "scop_data/non_redundant_list.txt") as non_redundant:
-    for line in non_redundant:
-        line = line.rstrip()
-        omit_from_results_set[line] = 1
-        omit_from_results_set_pdb[line[1:5]+line[5:6].upper()] = 1
-
-
 # pp.pprint(omit_from_results_set_pdb)
 # exit()
 
@@ -27,14 +18,15 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
     reader = csv.reader(scop_list_file, delimiter=',', quotechar='"')
     for row in reader:
         # print(row)
-        scop_list[row[0]] = r".".join(row[1].split(".")[:-2])
+        scop_list[row[0]] = row[1]
         pdb = row[0][1:5]
         chain = row[0][5:6].upper()
         pdb_id = pdb+chain
         try:
-            pdb_list[pdb_id].append(r".".join(row[1].split(".")[:-2]))
+            #pdb_list[pdb_id].append(r".".join(row[1].split(".")[:-2]))
+            pdb_list.append(row[1])
         except:
-            pdb_list[pdb_id] = [r".".join(row[1].split(".")[:-2]), ]
+            pdb_list[pdb_id] = [row[1], ]
 
 # pp.pprint(scop_list)
 # pp.pprint(pdb_list)
@@ -45,7 +37,7 @@ with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/'
           'scop_data/benchmark_family_members.txt') as benchfile:
     reader = csv.reader(benchfile, delimiter=',', quotechar='"')
     for row in reader:
-        bench_membership[row[0]] = r".".join(row[1].split(".")[:-2])
+        bench_membership[row[0]] = row[1]
 
 # pp.pprint(bench_membership)
 # exit()
@@ -69,7 +61,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
             out = open(result_dir+"processed_comparison/"+pdb_id+".eigentop",
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
-            out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
+            scop_class = bench_membership[pdb_id]
+            out.write("# SCOP FAMILY: "+scop_class+"\n")
         #     # print(file)
             with open(file) as csvresult:
                 lines = [line.split() for line in csvresult]
@@ -77,21 +70,27 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                 # print(lines[len(lines)-5:len(lines)])
 
                 for line in lines:
-                    if line[3] in omit_from_results_set:
-                        # print("SKIPPING")
-                        pass
-                    else:
-                        try:
+                    try:
+                        scop_3_levels = ".".join(scop_class.split(".")[:-1])
+                        this_3_levels = ".".join(scop_list[line[3]].split(".")[:-1])
+                        # print(scop_3_levels)
+                        if scop_list[line[3]] == scop_class:
+                            print("FAMILY MATCH")
+                        elif scop_3_levels == this_3_levels:
+                            print("SUPERFAMILY MATCH")
+                        else:
                             result_array = [line[0], line[3], scop_list[line[3]]]
-                        except:
-                            result_array = [line[0], line[3], ""]
-                        results_list.append(result_array)
+                    except:
+                        result_array = [line[0], line[3], ""]
+                    results_list.append(result_array)
+
             results = results_list[len(results_list)-10:len(results_list)]
             for element in reversed(results):
                 out.write(element[0]+","+element[1]+","+element[2]+"\n")
                 # pp.pprint(element)
         else:
             continue
+        # break
 
 
 def parse_hh(omit_from_results_set, scop_list, bench_membership):
@@ -101,7 +100,6 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
     start_parse_re = re.compile(start_parse_pattern)
     end_parse_pattern = r"^No\s1"
     end_parse_re = re.compile(end_parse_pattern)
-    print("hi")
     for file in glob.glob(result_dir+"hhresults/*.hhr"):
         print(file)
         results_list = []
@@ -153,7 +151,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                 else:
                     results = results_list
                 for element in results:
-                    out.write(element[0]+","+element[1]+","+element[2]+"\n")
+                    out.write(element[0]+","+element[1]+","+r".".join(element[2].split(".")[:-1])+"\n")
                 # pp.pprint(element)
         else:
             continue
@@ -202,6 +200,6 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
             continue
         # break
 
-# parse_eigen(omit_from_results_set, scop_list, bench_membership)
-parse_hh(omit_from_results_set, scop_list, bench_membership)
-# parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
+parse_eigen(omit_from_results_set, scop_list, bench_membership)
+#parse_hh(omit_from_results_set, scop_list, bench_membership)
+#parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)

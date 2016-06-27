@@ -28,12 +28,12 @@ find_homologues.py - read the scop classification and identify the SCOP
                      non_redundant_list.txt: A list of all the benchmark pdb
                                              ids AND ids of their immediate
                                              homologues
-                    non_redundant_list_superfamily.txt: as above but
+                     non_redundant_list_superfamily.txt: as above but
                                                         superfamily members
-                    benchmark_family_members.txt : scop family members for the
+                     benchmark_family_members.txt : scop family members for the
 
-                    benchmark_superfamily_members.txt :
-                    benchmark_domain_id.txt : scop domain IDS for the benchmark
+                     benchmark_superfamily_members.txt :
+                     benchmark_domain_id.txt : scop domain IDS for the benchmark
                                               set
 Process benchmark data:
 count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
