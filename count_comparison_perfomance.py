@@ -30,7 +30,7 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
 
 # pp.pprint(scop_list)
 # pp.pprint(pdb_list)
-exit()
+# exit()
 
 bench_membership = {}
 with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/'
