@@ -113,6 +113,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
             print(result_dir+"processed_comparison/"+pdb_id+".hhtop")
             out = open(result_dir+"processed_comparison/"+pdb_id+".hhtop", "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
+            scop_class = bench_membership[pdb_id]
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
             print(file)
             with open(file) as hhrResult:
@@ -136,7 +137,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         template_region = line[85:99].lstrip()
 
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
-                        this_3_levels = ".".join(scop_list[line[3]].split(".")[:-1])
+                        this_3_levels = ".".join(scop_list[scop_family.split(".")[:-1])
 
                         print(scop_3_levels)
                         if domain_id in omit_from_results_set:
