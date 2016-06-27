@@ -97,7 +97,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                     results_list.append(result_array)
                     result_array = []
 
-            # pp.pprint(results_list)
+            pp.pprint(results_list)
             results = results_list[len(results_list)-10:len(results_list)]
             pp.pprint(results)
 
