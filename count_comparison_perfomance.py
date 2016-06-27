@@ -78,7 +78,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                 lines = [line.split() for line in csvresult]
                 lines.sort(key=lambda s: float(s[0]))
                 # print(lines[len(lines)-5:len(lines)])
-
+                result_array = []
                 for line in lines:
                     try:
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
@@ -131,6 +131,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
             print(file)
             with open(file) as hhrResult:
                 lines = hhrResult.read().splitlines()
+                result_array = []
                 for line in lines:
                     start_parse_result = start_parse_re.match(line)
                     end_parse_result = end_parse_re.match(line)
@@ -204,7 +205,7 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
             # print(file)
             with open(file) as genthresult:
                 lines = genthresult.read().splitlines()
-
+                result_array = []
                 for line in lines:
                     entries = line.split()
                     #scop_3_levels = ".".join(scop_class.split(".")[:-1])
