@@ -97,9 +97,9 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                         result_array = [line[0], line[3], ""]
                         results_list.append(result_array)
 
-            pp.pprint(results_list)
+            # pp.pprint(results_list)
             results = results_list[len(results_list)-10:len(results_list)]
-            pp.pprint(results)
+            # pp.pprint(results)
 
             for element in reversed(results):
                 out.write(element[0]+","+element[1]+","+element[2]+"\n")
