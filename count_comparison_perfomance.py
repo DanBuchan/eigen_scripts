@@ -28,7 +28,7 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
         except:
             pdb_list[pdb_id] = [row[1], ]
 
-pp.pprint(scop_list)
+# pp.pprint(scop_list)
 # pp.pprint(pdb_list)
 exit()
 
@@ -194,8 +194,8 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
 
                 for line in lines:
                     entries = line.split()
-                    scop_3_levels = ".".join(scop_class.split(".")[:-1])
-                    this_3_levels = ".".join(scop_list[entries[9][0:5]].split(".")[:-1])
+                    #scop_3_levels = ".".join(scop_class.split(".")[:-1])
+                    # this_3_levels = ".".join(scop_list[entries[9][0:5]].split(".")[:-1])
 
                     if entries[9][0:5] in omit_from_results_set_pdb:
                         # print("SKIPPING")
@@ -215,6 +215,6 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
             continue
         # break
 
-# parse_eigen(omit_from_results_set, scop_list, bench_membership)
-# parse_hh(omit_from_results_set, scop_list, bench_membership)
+parse_eigen(omit_from_results_set, scop_list, bench_membership)
+parse_hh(omit_from_results_set, scop_list, bench_membership)
 parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
