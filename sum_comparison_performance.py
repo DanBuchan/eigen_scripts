@@ -68,7 +68,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
             elif(scop_result):
                 this_scop_class = scop_result.group(1)
                 # print(this_scop_class)
-                scop_class, fold = this_scop_class.split(".")
+                scop_class, fold, this_superf, this_family = this_scop_class.split(".")
             elif(line_result):
                 result_count += 1
                 entries = line.split(",")
