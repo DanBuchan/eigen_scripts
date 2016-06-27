@@ -9,7 +9,7 @@ omit_from_results_set = {}
 omit_from_results_set_pdb = {}
 
 with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
-          "scop_data/non_redundant_list.txt") as non_redundant:
+          "scop_data/non_redundant_list_superfamily_level.txt") as non_redundant:
     for line in non_redundant:
         line = line.rstrip()
         omit_from_results_set[line] = 1
