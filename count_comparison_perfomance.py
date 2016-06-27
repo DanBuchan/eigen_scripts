@@ -85,11 +85,9 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                         this_3_levels = ".".join(scop_list[line[3]].split(".")[:-1])
                         # print(scop_3_levels)
                         if scop_list[line[3]] == scop_class:
-                            pass
-                            # print("FAMILY MATCH")
+                            print("FAMILY MATCH")
                         elif scop_3_levels == this_3_levels:
-                            pass
-                            # print("SUPERFAMILY MATCH")
+                            print("SUPERFAMILY MATCH")
                         else:
                             result_array = [line[0], line[3], scop_list[line[3]]]
                     except:
@@ -97,6 +95,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                     results_list.append(result_array)
 
             results = results_list[len(results_list)-10:len(results_list)]
+            print(results)
             for element in reversed(results):
                 out.write(element[0]+","+element[1]+","+element[2]+"\n")
                 # pp.pprint(element)
