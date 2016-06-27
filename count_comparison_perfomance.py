@@ -57,8 +57,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
     result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
                  "eigen_thread/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
-        if "1fvk" not in file:
-            continue
+        # if "1fvk" not in file:
+        #     continue
         print(file)
         results_list = []
         pdb = file[-9:-5]
@@ -85,11 +85,9 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                         this_3_levels = ".".join(scop_list[line[3]].split(".")[:-1])
                         # print(scop_3_levels)
                         if scop_list[line[3]] == scop_class:
-                            pass
-                            # print("FAMILY MATCH")
+                            print("FAMILY MATCH")
                         elif scop_3_levels == this_3_levels:
-                            pass
-                            # print("SUPERFAMILY MATCH")
+                            print("SUPERFAMILY MATCH")
                         else:
                             result_array = [line[0], line[3], scop_list[line[3]]]
                             results_list.append(result_array)
