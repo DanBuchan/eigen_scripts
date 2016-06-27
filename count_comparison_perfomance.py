@@ -165,9 +165,10 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                                 print("SUPERFAMILY MATCH")
                             else:
                                 result_array = [score, domain_id, scop_family]
+                                results_list.append(result_array)
                         except:
                             result_array = [score, domain_id, ""]
-                        results_list.append(result_array)
+                            results_list.append(result_array)
                     if start_parse_result:
                         parse_ctl = True
                 # pp.pprint(results_list)
@@ -221,9 +222,10 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                         # print(entries[9][0:5])
                         try:
                             result_array = [entries[2], entries[9], ",".join(pdb_list[entries[9][0:5]])]
+                            results_list.append(result_array)
                         except:
                             result_array = [entries[2], entries[9], ""]
-                        results_list.append(result_array)
+                            results_list.append(result_array)
             results = results_list[0:10]
             for element in results:
                 out.write(element[0]+","+element[1]+","+element[2]+"\n")
@@ -233,5 +235,5 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         # break
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
-# parse_hh(omit_from_results_set, scop_list, bench_membership)
-# parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
+parse_hh(omit_from_results_set, scop_list, bench_membership)
+parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
