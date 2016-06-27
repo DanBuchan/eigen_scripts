@@ -142,14 +142,14 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         print(scop_3_levels)
                         try:
                             # print(scop_3_levels)
-                            if scop_list[line[3]] == scop_class:
+                            if scop_family == scop_class:
                                 print("FAMILY MATCH")
                             elif scop_3_levels == this_3_levels:
                                 print("SUPERFAMILY MATCH")
                             else:
-                                result_array = [line[0], line[3], scop_list[line[3]]]
+                                result_array = [score, domain_id, scop_family]
                         except:
-                            result_array = [line[0], line[3], ""]
+                            result_array = [score, domain_id, ""]
                         results_list.append(result_array)
                     if start_parse_result:
                         parse_ctl = True
