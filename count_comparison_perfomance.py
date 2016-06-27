@@ -139,7 +139,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_family.split(".")[:-1])
 
-                        print(scop_3_levels)
+                        # print(scop_3_levels)
                         try:
                             # print(scop_3_levels)
                             if scop_family == scop_class:
@@ -159,9 +159,9 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                     results = results_list[0:10]
                 else:
                     results = results_list
-                print(results)
+                # print(results)
                 for element in results:
-                    pp.pprint(element)
+                    # pp.pprint(element)
                     out.write(element[0]+","+element[1]+","+element[2]+"\n")
                 # pp.pprint(element)
         else:
