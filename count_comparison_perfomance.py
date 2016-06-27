@@ -134,6 +134,10 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         cols = line[70:75].lstrip()
                         query_region = line[75:85].lstrip()
                         template_region = line[85:99].lstrip()
+
+                        scop_3_levels = ".".join(scop_family.split(".")[:-1])
+                        this_3_levels = ".".join(scop_list[scop_family.split(".")[:-1])
+                        print(scop_3_levels)
                         if domain_id in omit_from_results_set:
                             pass
                         else:
@@ -151,7 +155,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                 else:
                     results = results_list
                 for element in results:
-                    out.write(element[0]+","+element[1]+","+r".".join(element[2].split(".")[:-1])+"\n")
+                    out.write(element[0]+","+element[1]+","+r".".element[2]+"\n")
                 # pp.pprint(element)
         else:
             continue
