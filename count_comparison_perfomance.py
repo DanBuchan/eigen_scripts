@@ -58,7 +58,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                  "eigen_thread/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
         if "1fvk" not in file:
-            next
+            continue
         print(file)
         results_list = []
         pdb = file[-9:-5]
