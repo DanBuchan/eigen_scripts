@@ -78,8 +78,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                 lines = [line.split() for line in csvresult]
                 lines.sort(key=lambda s: float(s[0]))
                 # print(lines[len(lines)-5:len(lines)])
-                result_array = []
                 for line in lines:
+                    result_array = []
                     try:
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_list[line[3]].split(".")[:-1])
