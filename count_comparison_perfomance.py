@@ -61,6 +61,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
             continue
         print(file)
         results_list = []
+        result_array = []
         pdb = file[-9:-5]
         print(pdb)
         chain = file[-5]
@@ -79,7 +80,6 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                 lines.sort(key=lambda s: float(s[0]))
                 # print(lines[len(lines)-5:len(lines)])
                 for line in lines:
-                    result_array = []
                     try:
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_list[line[3]].split(".")[:-1])
@@ -95,6 +95,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                     except:
                         result_array = [line[0], line[3], ""]
                     results_list.append(result_array)
+                    result_array = []
 
             # pp.pprint(results_list)
             results = results_list[len(results_list)-10:len(results_list)]
