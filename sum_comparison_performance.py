@@ -75,7 +75,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
                 entries = entries[2:]
                 # print(entries)
                 for entry in entries:
-                    print(entry)
+                    # print(entry)
                     this_class, this_fold, this_superf, this_family = entry.split(".")
                     if this_class == scop_class and result_count < class_found:
                         class_found = result_count
