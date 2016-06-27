@@ -192,12 +192,11 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
             with open(file) as genthresult:
                 lines = genthresult.read().splitlines()
 
-                scop_3_levels = ".".join(scop_class.split(".")[:-1])
-                this_3_levels = ".".join(scop_list[entries[9][0:5]].split(".")[:-1])
-
                 for line in lines:
                     entries = line.split()
-        #            print(entries)
+                    scop_3_levels = ".".join(scop_class.split(".")[:-1])
+                    this_3_levels = ".".join(scop_list[entries[9][0:5]].split(".")[:-1])
+
                     if entries[9][0:5] in omit_from_results_set_pdb:
                         # print("SKIPPING")
                         pass
