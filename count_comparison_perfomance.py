@@ -137,7 +137,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         template_region = line[85:99].lstrip()
 
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
-                        this_3_levels = ".".join(scop_list[scop_family.split(".")[:-1])
+                        this_3_levels = ".".join(scop_list[scop_family].split(".")[:-1])
 
                         print(scop_3_levels)
                         if domain_id in omit_from_results_set:
