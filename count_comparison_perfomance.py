@@ -23,14 +23,14 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
         chain = row[0][5:6].upper()
         pdb_id = pdb+chain
         try:
-            #pdb_list[pdb_id].append(r".".join(row[1].split(".")[:-2]))
+            # pdb_list[pdb_id].append(r".".join(row[1].split(".")[:-2]))
             pdb_list.append(row[1])
         except:
             pdb_list[pdb_id] = [row[1], ]
 
-# pp.pprint(scop_list)
+pp.pprint(scop_list)
 # pp.pprint(pdb_list)
-# exit()
+exit()
 
 bench_membership = {}
 with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/'
