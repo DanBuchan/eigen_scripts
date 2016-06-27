@@ -161,6 +161,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                     results = results_list
                 print(results)
                 for element in results:
+                    pp.pprint(element)
                     out.write(element[0]+","+element[1]+","+r".".element[2]+"\n")
                 # pp.pprint(element)
         else:
