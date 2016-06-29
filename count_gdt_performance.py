@@ -18,22 +18,17 @@ eigen_models = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
 benchmark_models = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
                    "eigen_thread/eigenthreader/structures/"
 
-tm_pattern = "TM-score\s+=\s+(.+)\s+\("
-# gdt_pattern = "GDT-TS-score=\s+(.+?)\s+%"
-tm_re = re.compile(tm_pattern)
-# gdt_re = re.compile(gdt_pattern)
 
-hh_tm_averages = [0, 0, 0, 0]
-hh_gdt_averages = [0, 0, 0, 0]
-gen_tm_averages = [0, 0, 0, 0]
-gen_gdt_averages = [0, 0, 0, 0]
+def average_eigen_scores(result_dir, ending):
+    tm_pattern = "TM-score\s+=\s+(.+)\s+\("
+    gdt_pattern = "GDT=\s+(.+?)"
+    tm_re = re.compile(tm_pattern)
+    gdt_re = re.compile(gdt_pattern)
 
-
-def average_eigen_scores():
     totes = 150
-    eigen_tm_averages = [0, 0, 0, 0]
-    eigen_gdt_averages = [0, 0, 0, 0]
-    for file in glob.glob(result_dir+"*.eigentop"):
+    tm_averages = [[], [], [], []]
+    gdt_averages = [[], [], [], []]
+    for file in glob.glob(result_dir+ending):
         pdb_id = file[-14:-9]
         print(file)
         with open(file) as scop_list_file:
@@ -49,37 +44,50 @@ def average_eigen_scores():
                 cmd = "/cs/research/bioinf/home1/green/dbuchan/bin/TMalign " + \
                     eigen_models+model+" " + \
                     benchmark_models+native_struct
+                print(cmd)
                 process = Popen(shlex.split(cmd), stdout=PIPE)
                 (output, err) = process.communicate()
-                if "There is no common residues in the input structures" in output:
-                    print("Nope: "+pdb_id)
-                    totes -= 1
-                    continue
                 exit_code = process.wait()
-                # print(output.decode("utf-8") )
-                print(cmd)
                 tm_result = tm_re.search(output.decode("utf-8"))
+
+                cmd = "/cs/research/bioinf/home1/green/dbuchan/bin/maxcluster" + \
+                    " -e "+eigen_models+model + \
+                    " -p "+benchmark_models+native_struct + \
+                    " -in -gdt"
+                print(cmd)
+                process = Popen(shlex.split(cmd), stdout=PIPE)
+                (output, err) = process.communicate()
+                exit_code = process.wait()
                 gdt_result = gdt_re.search(output.decode("utf-8"))
 
                 tm_results.append(float(tm_result.group(1)))
-                # gdt_results.append(float(gdt_result.group(1)))
-                # print(tm_score)
-                # > TMScore model native
-                # break
+                gdt_results.append(float(gdt_result.group(1)))
+
             print(tm_results)
             print(gdt_results)
 
-            eigen_tm_averages[0] += tm_results[0]
-            eigen_gdt_averages[0] += gdt_results[0]
-            eigen_tm_averages[1] += mean(tm_results[0:2])
-            eigen_gdt_averages[1] += mean(gdt_results[0:2])
-            eigen_tm_averages[2] += mean(tm_results[0:5])
-            eigen_gdt_averages[2] += mean(gdt_results[0:5])
-            eigen_tm_averages[3] += mean(tm_results)
-            eigen_gdt_averages[3] += mean(gdt_results)
+            if len(tm_results) > 0:
+                tm_averages[0].append(tm_results[0])
+            if len(tm_results) > 1:
+                tm_averages[1].append(mean(tm_results[0:2]))
+            if len(tm_results) > 4:
+                tm_averages[2].append(mean(tm_results[0:5]))
+            if len(tm_results) > 9:
+                tm_averages[3].append(mean(tm_results))
 
+            if len(gdt_results) > 0:
+                gdt_averages[0].append(gdt_results[0])
+            if len(gdt_results) > 1:
+                gdt_averages[1].append(mean(gdt_results[0:2]))
+            if len(gdt_results) > 4:
+                gdt_averages[2].append(mean(gdt_results[0:5]))
+            if len(gdt_results) > 9:
+                gdt_averages[3].append(mean(gdt_results))
 
-(eigen_tm_averages, eigen_gdt_averages) = average_eigen_scores()
+    return(tm_averages, gdt_averages)
+
+(eigen_tm_averages, eigen_gdt_averages) = average_eigen_scores(result_dir,
+                                                               "*.eigentop")
 
 print(eigen_tm_averages)
 print(eigen_gdt_averages)
