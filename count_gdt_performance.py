@@ -68,7 +68,8 @@ def average_scores(result_dir, ending):
                     tm_result = tm_re.search(output.decode("utf-8"))
                     tm_results.append(float(tm_result.group(1)))
                 except:
-                    eprint("COULD NOT RUN TMalign")
+                    eprint("COULD NOT RUN TMalign")lo   q
+
 
                 try:
                     cmd = "/cs/research/bioinf/home1/green/dbuchan/bin/maxcluster64bit" + \
