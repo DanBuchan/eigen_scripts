@@ -16,4 +16,8 @@
 > for i in `ls ~/archive0/eigen_thread/eigenthreader/seq_files/ | sed -e 's/\.fasta//'`; do hhsearch -i ~/archive0/eigen_thread/eigenthreader/seq_files/$i.fasta -o hhresults/$i.hhr -d scop70_1.75; done
 
 #run HHmakemodel.pl
-> for i in `ls | sed -e 's/\.hhr//'`; do hhmakemodel.pl -i $i.hhr -d /scratch0/NOT_BACKED_UP/dbuchan/pdb/ -ts $i.pdb ; done
+> for i in `ls *.hhr | sed -e 's/\.hhr//'`; do echo $i; hhmakemodel.pl -i $i.hhr -d /scratch0/NOT_BACKED_UP/dbuchan/pdb/ -ts $i.pdb -m `seq -s " " 1 200` ; done
+
+#split the models in to seperate files in order to process them as per the
+#eigen and genth ouputs
+> split_hh_models.py

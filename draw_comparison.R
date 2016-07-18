@@ -1,7 +1,7 @@
 library(ggplot2)
 require(scales)
 
-comparison_data <- read.csv(file="/Users/dbuchan/Code/eigen_scripts/comparison_performance.csv", header=TRUE,  strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
+comparison_data <- read.csv(file="/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/comparison_performance.csv", header=TRUE,  strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
 comparison_data$superf<-NULL
 comparison_data$family<-NULL
 colnames(comparison_data)<-c("Top","Method","Class","Fold")
