@@ -1,8 +1,9 @@
 run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
-run_strsum_eigen.py - runs the eigengthreader tdb generator over a db of pdb and dssp files
-                      Uses the HHSearch_overlap dir as the source of which
+
+1) run_strsum_eigen.py - runs the eigengthreader tdb generator over a db of pdb and dssp files
+                      Uses the HHSearch_overlap dir as the sourcece of which
                       files to generate
-run_blast.py - runs blastp over a dir of fasta files
+3) run_blast.py - runs blastp over a dir of fasta files
 
 
 Sorting the fold libs:
@@ -14,9 +15,9 @@ sort_structure_libs.py - takes the list of unified pdbs and moves the files to
 
 
 Removing homologues from fold libs:
-extract_fasta.py - extracts the fasta files from the HHSearch pdbs
+2) extract_fasta.py - extracts the fasta files from the HHSearch hhms
                    hhsearch.fasta
-remove_homolgues.py - removes the homologues from the fold libs found in the blast run
+4) remove_homolgues.py - removes the homologues from the fold libs found in the blast run
 find_homologues.py - read the scop classification and identify the SCOP
                      structural homologues for the PSICOV benchmark set
                      pdb_scop_class.txt: pdb Domain ID to SCOP class for ALL
@@ -45,6 +46,7 @@ count_performance.py - work out the t1,t2,t5 and t10 performance for graphing.
 draw_benchmark_performance_graph.R - takes the eigenvector performance numbers
                                      and the distance numbers and plots some
                                      graphs
+
 
 count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
                                  and outputs the best 10 results for each method

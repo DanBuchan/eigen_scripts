@@ -5,8 +5,8 @@ comparison_data <- read.csv(file="/cs/research/bioinf/home1/green/dbuchan/archiv
 comparison_data$superf<-NULL
 comparison_data$family<-NULL
 colnames(comparison_data)<-c("Top","Method","Class","Fold")
-comparison_data$top<-as.factor(comparison_data$top)
+comparison_data$Top<-as.factor(comparison_data$Top)
 comparison_data$Method<-as.factor(comparison_data$Method)
 
-ggplot(comparison_data, aes(x=Top, y=Class, group=Method, colour=Method))+geom_line(size=0.8)+theme_set(theme_gray(base_size=18))+ggtitle("Comparison of Class Recognition Performance")
-ggplot(comparison_data, aes(x=Top, y=Fold, group=Method, colour=Method))+geom_line(size=0.8)+theme_set(theme_gray(base_size=18))+ggtitle("Comparison of Fold Recognition Performance")
+ggplot(comparison_data, aes(x=Top, y=Class, group=Method, fill=Method))+geom_bar(stat="identity", position="dodge")+ggtitle("Comparison of Class Recognition Performance")+ylab("TPR")+xlab("Top X")
+ggplot(comparison_data, aes(x=Top, y=Fold, group=Method, fill=Method))+geom_bar(stat="identity", position="dodge")+ggtitle("Comparison of Fold Recognition Performance")+ylab("TPR")+xlab("Top X")

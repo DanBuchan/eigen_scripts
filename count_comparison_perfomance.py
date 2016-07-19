@@ -178,6 +178,8 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                 # print(results)
                 for element in results:
                     # pp.pprint(element)
+                    element[2] = element[2].rstrip("(")
+                    element[2] = element[2].rstrip()
                     out.write(element[0]+","+element[1]+","+element[2]+"\n")
                 # pp.pprint(element)
         else:
@@ -203,6 +205,7 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
+            # print(scop_class)
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
             # print(file)
             with open(file) as genthresult:
@@ -210,27 +213,31 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                 result_array = []
                 for line in lines:
                     entries = line.split()
-                    #scop_3_levels = ".".join(scop_class.split(".")[:-1])
-                    # this_3_levels = ".".join(scop_list[entries[9][0:5]].split(".")[:-1])
+                    scop_3_levels = ".".join(scop_class.split(".")[:-1])
+                    this_3_levels = ".".join(scop_list[entries[9]].split(".")[:-1])
 
-                    if entries[9][0:5] in omit_from_results_set_pdb:
-                        # print("SKIPPING")
-                        pass
+                    #print(entries[9])
+                    if scop_list[entries[9]] == scop_class:
+                         print("FAMILY MATCH")
+                    elif scop_3_levels == this_3_levels:
+                         print("SUPERFAMILY MATCH")
                     else:
-                        # print(entries[9][0:5])
+                        #print(entries[9][0:5])
                         try:
-                            result_array = [entries[2], entries[9], ",".join(pdb_list[entries[9][0:5]])]
+                            result_array = [entries[2], entries[9], scop_list[entries[9]]]
                             results_list.append(result_array)
                         except:
                             result_array = [entries[2], entries[9], ""]
                             results_list.append(result_array)
-            results = results_list[0:10]
+
+                results = results_list[0:10]
+
             for element in results:
                 out.write(element[0]+","+element[1]+","+element[2]+"\n")
         #        pp.pprint(element)
         else:
             continue
-        # break
+        #break
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
 parse_hh(omit_from_results_set, scop_list, bench_membership)

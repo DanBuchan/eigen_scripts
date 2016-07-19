@@ -3,7 +3,7 @@ import pprint
 import re
 pp = pprint.PrettyPrinter(indent=4)
 
-for file in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/HHSearch_overlap/*.hhm"):
+for file in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/HHSearch_hmm_complete/*.hhm"):
     pdb = file[-11:-4]
     #print(pdb)
     print_ctl = 0
