@@ -4,7 +4,6 @@ import sys
 from collections import Counter
 
 hh_list = "/cs/research/bioinf/archive0/eigen_thread/hhsearch_chain_list.txt"
-gt_list = "/cs/research/bioinf/archive0/eigen_thread/psichain_sort.lst"
 
 def get_list(this_list, path):
     with open(path) as infile:

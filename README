@@ -3,22 +3,20 @@ run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
 1) run_strsum_eigen.py - runs the eigengthreader tdb generator over a db of pdb and dssp files
                       Uses the HHSearch_overlap dir as the sourcece of which
                       files to generate
-3) run_blast.py - runs blastp over a dir of fasta files
+2) equalise_fold_libs.py - read the HHSeach lib and delete anything that isn't
+                           in the et_data lib
+
+4) run_blast.py - runs blastp over a dir of fasta files
 
 
 Sorting the fold libs:
-diff_chains_list.py - takes list of db files for each method and outputs a file
-                      indicating which pdbs are in all the libraries
-                      joint_chains.txt
-sort_structure_libs.py - takes the list of unified pdbs and moves the files to
-                         the union/overlapping fold recognition dbs
 
 
 Removing homologues from fold libs:
-2) extract_fasta.py - extracts the fasta files from the HHSearch hhms
+3) extract_fasta.py - extracts the fasta files from the HHSearch hhms
                    hhsearch.fasta
-4) remove_homolgues.py - removes the homologues from the fold libs found in the blast run
-find_homologues.py - read the scop classification and identify the SCOP
+5) remove_homolgues.py - removes the homologues from the fold libs found in the blast run
+6) find_homologues.py - read the scop classification and identify the SCOP
                      structural homologues for the PSICOV benchmark set
                      pdb_scop_class.txt: pdb Domain ID to SCOP class for ALL
                                          classified pdb chains
@@ -36,6 +34,13 @@ find_homologues.py - read the scop classification and identify the SCOP
                      benchmark_superfamily_members.txt :
                      benchmark_domain_id.txt : scop domain IDS for the benchmark
                                               set
+
+7) run_eigen_threader_morecambe.py: run it changing the t value from 1 to 20 (c=10)
+8) run_eigen_threader_morecambe.py: run it changing the c value from 1 to 20 (t=20)
+9) Walkthrough HHSearch_build.txt instructions, to generate the HHSearch comparison data
+10) then run genthreader with the et_reduced lib run_genthreader.py. Edit GenThreader.sh
+for the fold lib and list
+
 Process benchmark data:
 count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
                                  outputs the t1, t2, t5 and t10 performances
@@ -47,6 +52,7 @@ draw_benchmark_performance_graph.R - takes the eigenvector performance numbers
                                      and the distance numbers and plots some
                                      graphs
 
+Check graphs and then run optimised eigenthreader!!!!
 
 count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
                                  and outputs the best 10 results for each method

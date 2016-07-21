@@ -27,7 +27,7 @@ def run_strsum_eigen(file):
     call([exe, scop_file, dssp_dir+dssp, thread_dir+tdb, thread_dir+eig])
 
 seqs = {}
-pdb_dir = "/scratch0/NOT_BACKED_UP/dbuchan/HHSearch_hmm_complete/"
+pdb_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/HHSearch_hmm_complete/"
 #run_strsum_eigen("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/HHSearch_overlap/d1fpoa2.hhm")
 p = Pool(10)
 p.map(run_strsum_eigen, glob.glob(pdb_dir+"*.hhm"))

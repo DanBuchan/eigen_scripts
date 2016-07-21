@@ -1,5 +1,5 @@
 # make the a3m index
-> ffindex_build -s scop70_1.75_a3m.ffdata scop70_1.75_a3m.ffindex HHSearch/
+> ffindex_build -s scop70_1.75_a3m.ffdata scop70_1.75_a3m.ffindex HHSearch_a3m_reduced/
 
 #build the hhm files
 > for i in `ls | sed -e 's/\.a3m//'`; do hhmake -i $i.a3m -o $i.hhm; done
@@ -8,15 +8,19 @@
 > for i in `ls`; do tail -n +2 $i > tmpfile; mv tmpfile $i;done
 
 # make the hhm index
-> ffindex_build -s scop70_1.75_hhm.ffdata scop70_1.75_hhm.ffindex HHSearch_hmm/
+> ffindex_build -s scop70_1.75_hhm.ffdata scop70_1.75_hhm.ffindex HHSearch_hmm_reduced/
 # make the cs219 files
 > cstranslate -A /scratch0/NOT_BACKED_UP/dbuchan/usr/data/cs219.lib -D /scratch0/NOT_BACKED_UP/dbuchan/usr/data/context_data.lib -x 0.3 -c 4 -f -i scop70_1.75_a3m -o scop70_1.75_cs219 -I a3m -b
 
 #run the HHSearches
 > for i in `ls ~/archive0/eigen_thread/eigenthreader/seq_files/ | sed -e 's/\.fasta//'`; do hhsearch -i ~/archive0/eigen_thread/eigenthreader/seq_files/$i.fasta -o hhresults/$i.hhr -d scop70_1.75; done
 
+#Retrieve the pdbs for scop 1.75 that aren't in our local PDB copy as they had
+#been depracted
+> get_old_HH_pdbs.sh
+
 #run HHmakemodel.pl
-> for i in `ls *.hhr | sed -e 's/\.hhr//'`; do echo $i; hhmakemodel.pl -i $i.hhr -d /scratch0/NOT_BACKED_UP/dbuchan/pdb/ -ts $i.pdb -m `seq -s " " 1 200` ; done
+> for i in `ls *.hhr | sed -e 's/\.hhr//'`; do echo $i; hhmakemodel.pl -i $i.hhr -d /scratch0/NOT_BACKED_UP/dbuchan/pdb/ -ts $i.pdb -m `seq -s " " 1 200` ; mv $i.hhr $i.hhr_modelled ; done
 
 #split the models in to seperate files in order to process them as per the
 #eigen and genth ouputs

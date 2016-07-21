@@ -29,7 +29,7 @@ seqs = {}
 con_dir = "/home/dbuchan/eigen_benchmark/confiles/"
 # fasta= open("pdb_2015.fasta", "w")
 
-for vect in range(9, 10):
+for vect in range(1, 21):
     for file in glob.glob(con_dir+"*.con"):
         run_eigen(file, vect)
         #break
