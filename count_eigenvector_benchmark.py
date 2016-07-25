@@ -7,7 +7,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # load in the list of scop family members of the benchmarks set
 omit_from_results_set = {}
-with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_data/non_redundant_list.txt") as non_redundant:
+with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_data/non_redundant_list_family_level.txt") as non_redundant:
     for line in non_redundant:
         line = line.rstrip()
         omit_from_results_set[line] = 1
@@ -29,7 +29,7 @@ with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_da
 # read in benchmark family members to find out which
 
 
-for result_dir in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/eigenvectors/t*"):
+for result_dir in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/distance/c*"):
     print(result_dir)
     for file in glob.glob(result_dir+"/*.out"):
         results_list = []

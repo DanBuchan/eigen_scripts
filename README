@@ -45,9 +45,9 @@ Process benchmark data:
 count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
                                  outputs the t1, t2, t5 and t10 performances
                                  (skipping the immediate structural homologues
-                                 as given by SCOP)
-count_performance.py - work out the t1,t2,t5 and t10 performance for graphing.
-
+                                 as given by SCOP), t and c values changed by editing
+count_performance.py- work out the t1,t2,t5 and t10 performance for graphing.
+                      c and t values changed by editing
 draw_benchmark_performance_graph.R - takes the eigenvector performance numbers
                                      and the distance numbers and plots some
                                      graphs
