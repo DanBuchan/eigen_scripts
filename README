@@ -42,23 +42,25 @@ Removing homologues from fold libs:
 for the fold lib and list
 
 Process benchmark data:
-count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
+11) count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
                                  outputs the t1, t2, t5 and t10 performances
                                  (skipping the immediate structural homologues
                                  as given by SCOP), t and c values changed by editing
-count_performance.py- work out the t1,t2,t5 and t10 performance for graphing.
+12) count_performance.py- work out the t1,t2,t5 and t10 performance for graphing.
                       c and t values changed by editing
-draw_benchmark_performance_graph.R - takes the eigenvector performance numbers
+13) draw_benchmark_performance_graph.R - takes the eigenvector performance numbers
                                      and the distance numbers and plots some
                                      graphs
 
 Check graphs and then run optimised eigenthreader!!!!
 
-count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
+14) count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
                                  and outputs the best 10 results for each method
                                  see /processed_comparison
-sum_comparison_performance.py - work out the t1,t2,t5 and t10 performance
+15) sum_comparison_performance.py - work out the t1,t2,t5 and t10 performance
                                   for each method
 
-* count_gdt_perfomance.py - takes the genth, hhsearch and optimal eig models and
+16) count_gdt_perfomance.py - takes the genth, hhsearch and optimal eig models and
                             calculates the modelling performance
+
+17) draw_comparison.R - create barchart of the fold recognition comparison performance

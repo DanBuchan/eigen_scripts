@@ -9,7 +9,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 def run_eigen(file):
-    os.environ["TDB_DIR"] = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/et_overlap/"
+    os.environ["TDB_DIR"] = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/et_reduced/"
     pdb = file[-11:-6]
     #print(pdb)
     seq_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/seq_files/"+pdb+".fasta"
@@ -19,7 +19,7 @@ def run_eigen(file):
     stdout = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/optimised_t20_c9/"+pdb+".stdout"
     #
     exe = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/bin/eigenthreader"
-    et_lst = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/et.lst"
+    et_lst = "/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/data/et.lst"
     f = open(stdout, "w")
     print(exe+" -m"+pdb+" -c9"+" -C0"+" -t20"+" -z1250"+" -F"+ss2_file+" "+file+" "+con_file+" "+out+" "+et_lst)
     call([exe, "-m"+pdb, "-c9", "-C0", "-t20", "-z1250", "-F"+ss2_file, file, con_file, out, et_lst], stdout=f)
