@@ -64,3 +64,9 @@ Check graphs and then run optimised eigenthreader!!!!
                             calculates the modelling performance
 
 17) draw_comparison.R - create barchart of the fold recognition comparison performance
+
+### AND THERE'S MORE
+
+18) subset_contacts.py - takes the metapsicov contact files and outputs
+L/2, L/5, L/10 subsets for top and random subsets for long range contacts
+separation > 21 residues
