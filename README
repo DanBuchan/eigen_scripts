@@ -70,3 +70,6 @@ Check graphs and then run optimised eigenthreader!!!!
 18) subset_contacts.py - takes the metapsicov contact files and outputs
 L/2, L/5, L/10 subsets for top and random subsets for long range contacts
 separation > 21 residues
+19) run_eigen_threader.py - takes the query input files and outputs
+an eigenthreader prediction, edited to take the subset contacts and output
+to an appropriate subset output dir

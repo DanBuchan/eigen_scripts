@@ -14,9 +14,9 @@ def run_eigen(file):
     #print(pdb)
     seq_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/seq_files/"+pdb+".fasta"
     ss2_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/ss2_files/"+pdb+".ss2"
-    con_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/confiles/"+pdb+".con"
-    out = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/optimised_t20_c9/"+pdb+".out"
-    stdout = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/optimised_t20_c9/"+pdb+".stdout"
+    con_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/contact_subsets/random/L/"+pdb+".con"
+    out = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/random/L/"+pdb+".out"
+    stdout = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/random/L/"+pdb+".stdout"
     #
     exe = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/bin/eigenthreader"
     et_lst = "/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/data/et.lst"
