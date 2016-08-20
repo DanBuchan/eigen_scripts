@@ -14,7 +14,7 @@ def run_eigen(file):
     #print(pdb)
     seq_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/seq_files/"+pdb+".fasta"
     ss2_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/ss2_files/"+pdb+".ss2"
-    con_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/contact_subsets/random/L/"+pdb+".con"
+    con_file = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/contact_subsets/random/L/"+pdb+"_L.con"
     out = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/random/L/"+pdb+".out"
     stdout = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/random/L/"+pdb+".stdout"
     #
