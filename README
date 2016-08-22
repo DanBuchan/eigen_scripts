@@ -1,3 +1,8 @@
+#Follow these steps in order to re-generate the data for the
+#eigenthreader paper. Some scripts get edited to point at
+#certain directories. Apols to the programmers who feel this is an
+#anathema
+
 run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
 
 1) run_strsum_eigen.py - runs the eigengthreader tdb generator over a db of pdb and dssp files
@@ -73,3 +78,4 @@ separation > 21 residues
 19) run_eigen_threader.py - takes the query input files and outputs
 an eigenthreader prediction, edited to take the subset contacts and output
 to an appropriate subset output dir
+20) count_eigenvector_benchmark.py : change the path to the .out files

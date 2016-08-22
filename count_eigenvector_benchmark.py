@@ -29,7 +29,8 @@ with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/scop_da
 # read in benchmark family members to find out which
 
 
-for result_dir in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/distance/c*"):
+#for result_dir in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/distance/c*"):
+for result_dir in glob.glob("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/top/L*"):
     print(result_dir)
     for file in glob.glob(result_dir+"/*.out"):
         results_list = []
