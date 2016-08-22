@@ -141,7 +141,7 @@ for directory in glob.glob(result_dir+"/L*"):
         # break
     # break
 
-print(t11_results)
+print(t10_results)
 def print_counts(top, data):
     output_line = ''
     for vect_count in sorted(data.items()):
