@@ -49,7 +49,7 @@ for directory in glob.glob(result_dir+"/L*"):
     # print(param)
     for file in glob.glob(directory+"/*.top"):
         counts = {}
-        # print(file[-9:])
+        print(file[-9:])
         result_count = 0
         f1 = open(file, "r")
         class_found = 100
