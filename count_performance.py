@@ -9,7 +9,7 @@ import math
 from collections import defaultdict
 pp = pprint.PrettyPrinter(indent=4)
 
-result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/random"
+result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/top"
 pdb_pattern = r"#\sPDB\sID:\s(.+)"
 scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
 result_pattern = r".+,.+,(.+)"
