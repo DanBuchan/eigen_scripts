@@ -83,3 +83,5 @@ an eigenthreader prediction, edited to take the subset contacts and output
 to an appropriate subset output dir
 20) count_eigenvector_benchmark.py : change the path to the .out files
 21) count_performance.py : change paths for the random/top .top files
+22) draw_top_performance_graph.R - draws the graphs for the top L and
+random L charts
