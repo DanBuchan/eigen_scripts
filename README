@@ -1,7 +1,7 @@
 #Follow these steps in order to re-generate the data for the
 #eigenthreader paper. Some scripts get edited to point at
-#certain directories. Apols to the programmers who feel this is an
-#anathema
+#certain directories (see steps 20, 21). Apols to the programmers
+who feel this is an anathema
 
 run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
 
@@ -79,3 +79,4 @@ separation > 21 residues
 an eigenthreader prediction, edited to take the subset contacts and output
 to an appropriate subset output dir
 20) count_eigenvector_benchmark.py : change the path to the .out files
+21) count_performance.py : change paths for the random/top .top files
