@@ -30,6 +30,7 @@ t10_results = defaultdict(dict)
 for directory in glob.glob(result_dir+"/L*"):
     param = directory[-3:]
     param = int(param.lstrip("/L"))
+    print(param)
     t1_results[param]["class"] = 0
     t2_results[param]["class"] = 0
     t5_results[param]["class"] = 0
