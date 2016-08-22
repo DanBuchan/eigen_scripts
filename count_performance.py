@@ -30,7 +30,7 @@ t10_results = defaultdict(dict)
 for directory in glob.glob(result_dir+"/L*"):
     param = directory[-3:]
     param = int(param.lstrip("/L"))
-    print(param)
+    # print(param)
     t1_results[param]["class"] = 0
     t2_results[param]["class"] = 0
     t5_results[param]["class"] = 0
@@ -50,7 +50,7 @@ for directory in glob.glob(result_dir+"/L*"):
     # print(param)
     for file in glob.glob(directory+"/*.top"):
         counts = {}
-        print(file[-9:])
+        # print(file[-9:])
         result_count = 0
         f1 = open(file, "r")
         class_found = 100
@@ -141,7 +141,7 @@ for directory in glob.glob(result_dir+"/L*"):
         # break
     # break
 
-
+print(t11_results)
 def print_counts(top, data):
     output_line = ''
     for vect_count in sorted(data.items()):
@@ -154,6 +154,6 @@ def print_counts(top, data):
     print(output_line.rstrip())
 print("top,vectors,class,fold,superf,family")
 print_counts("1", t1_results)
-print_counts("2", t2_results)
-print_counts("5", t5_results)
-print_counts("10", t10_results)
+# print_counts("2", t2_results)
+# print_counts("5", t5_results)
+# print_counts("10", t10_results)
