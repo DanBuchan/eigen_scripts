@@ -141,7 +141,8 @@ for directory in glob.glob(result_dir+"/L*"):
         # break
     # break
 
-print(t10_results)
+#print(t10_results)
+
 def print_counts(top, data):
     output_line = ''
     for vect_count in sorted(data.items()):
@@ -154,6 +155,6 @@ def print_counts(top, data):
     print(output_line.rstrip())
 print("top,vectors,class,fold,superf,family")
 print_counts("1", t1_results)
-# print_counts("2", t2_results)
-# print_counts("5", t5_results)
-# print_counts("10", t10_results)
+print_counts("2", t2_results)
+print_counts("5", t5_results)
+print_counts("10", t10_results)

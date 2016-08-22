@@ -1,7 +1,10 @@
 #Follow these steps in order to re-generate the data for the
 #eigenthreader paper. Some scripts get edited to point at
 #certain directories (see steps 20, 21). Apols to the programmers
-who feel this is an anathema
+#who feel this is an anathema
+#
+# Everything in python 3 btw
+
 
 run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
 
