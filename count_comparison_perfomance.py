@@ -127,6 +127,8 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
         chain = file[-5]
         pdb_id = pdb+chain
         print(pdb_id)
+        if "1rw7" not in pdb_id:
+            continue
         parse_ctl = False
         if pdb_id in bench_membership:
             print(result_dir+"processed_comparison/"+pdb_id+".hhtop")
