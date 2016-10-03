@@ -168,7 +168,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         overlap_size = float(0)
                         region_re_result = region_re.match(query_region)
                         if region_re_result:
-                            overlap = region_re_result.group(2)-region_re_result.group(1)
+                            overlap = int(region_re_result.group(2))-int(region_re_result.group(1))
                             print(str(overlap))
                         # print(scop_3_levels)
                         print(seq_length)
