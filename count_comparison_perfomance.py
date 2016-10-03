@@ -165,16 +165,12 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_family.split(".")[:-1])
 
-                        overlap_size = float(0)
+                        overlap_size = 0
                         region_re_result = region_re.match(query_region)
                         if region_re_result:
-                            overlap = int(region_re_result.group(2))-int(region_re_result.group(1))
-                            print("OVERLAP:"+str(overlap))
+                            overlap_size = int(region_re_result.group(2))-int(region_re_result.group(1))
                         # print(scop_3_levels)
-                        print("LENGTH:"+str(seq_length))
-                        print(type(overlap_size))
-                        print(type(seq_length))
-
+                        
                         percentage = overlap_size/seq_length
                         print("PERCENT:"+str(percentage))
                         if overlap_size/seq_length < 0.7:
