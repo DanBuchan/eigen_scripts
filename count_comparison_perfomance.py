@@ -172,7 +172,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                             print(str(overlap))
                         # print(scop_3_levels)
                         print(seq_length)
-                        print(str(float(overlap_size)/float(seq_length)))
+                        print(str(float(overlap_size)/seq_length))
                         if float(overlap_size)/float(seq_length) < 0.7:
                             continue
 
