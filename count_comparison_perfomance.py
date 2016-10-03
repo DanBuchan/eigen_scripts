@@ -169,8 +169,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                             overlap_size = int(region_re_result.group(2))-int(region_re_result.group(1))
                         # print(scop_3_levels)
 
-                        percentage = overlap_size/seq_length
-                        if overlap_size/seq_length < 0.7:
+                        if percentage < 0.7:
                             continue
 
                         try:
