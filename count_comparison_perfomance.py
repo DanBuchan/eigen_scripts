@@ -169,6 +169,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                             overlap_size = int(region_re_result.group(2))-int(region_re_result.group(1))
                         # print(scop_3_levels)
 
+                        percentage = overlap_size/seq_length
                         if percentage < 0.7:
                             continue
 
@@ -261,6 +262,6 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
             continue
         #break
 
-#parse_eigen(omit_from_results_set, scop_list, bench_membership)
+parse_eigen(omit_from_results_set, scop_list, bench_membership)
 parse_hh(omit_from_results_set, scop_list, bench_membership)
-#parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
+parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
