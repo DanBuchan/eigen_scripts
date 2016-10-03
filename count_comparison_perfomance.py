@@ -170,9 +170,8 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         if region_re_result:
                             overlap_size = int(region_re_result.group(2))-int(region_re_result.group(1))
                         # print(scop_3_levels)
-                        
+
                         percentage = overlap_size/seq_length
-                        print("PERCENT:"+str(percentage))
                         if overlap_size/seq_length < 0.7:
                             continue
 
