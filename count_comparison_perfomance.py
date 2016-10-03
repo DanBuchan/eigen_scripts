@@ -173,7 +173,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         # print(scop_3_levels)
                         print("LENGTH"+str(seq_length))
                         percentage = overlap_size/float(seq_length)
-                        print("PERCENT:"+percentage)
+                        print("PERCENT:"+str(percentage))
                         if float(overlap_size)/float(seq_length) < 0.7:
                             continue
 
