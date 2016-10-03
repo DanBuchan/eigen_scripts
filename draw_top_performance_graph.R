@@ -13,6 +13,6 @@ colnames(top_performance)<-c("top", "L", "class", "fold", "superf", "family")
 top_performance$L<-as.factor(top_performance$L)
 random_performance$L<-as.factor(random_performance$L)
 
-t1<-ggplot(top_performance, aes(x=L, y=fold, group=top, color=top))+geom_line(size=0.8)+theme_set(theme_gray(base_size = 18)) + ggtitle("Top")+ylab("TPR")+xlab("Contact Proportion")
-r1<-ggplot(random_performance, aes(x=L, y=fold, group=top, color=top))+geom_line(size=0.8)+theme_set(theme_gray(base_size = 18)) + ggtitle("Random")+ylab("TPR")+xlab("Contact Proportion")
+t1<-ggplot(top_performance, aes(x=L, y=fold, group=top, color=top))+geom_line(size=0.8)+theme_set(theme_gray(base_size = 18)) + ggtitle("Top")+ylab("TPR")+xlab("Contact Proportion (L/x)")
+r1<-ggplot(random_performance, aes(x=L, y=fold, group=top, color=top))+geom_line(size=0.8)+theme_set(theme_gray(base_size = 18)) + ggtitle("Random")+ylab("TPR")+xlab("Contact Proportion (L/x)")
 multiplot(t1,r1,cols=2)

@@ -114,7 +114,12 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
     start_parse_re = re.compile(start_parse_pattern)
     end_parse_pattern = r"^No\s1"
     end_parse_re = re.compile(end_parse_pattern)
+    length_pattern = r"^Match_columns\s(\d+)"
+    length_re = re.compile(length_pattern)
+    region_pattern = "(\d+)-()\d+)"
+    region_re = re.compile(region_pattern)
     for file in glob.glob(result_dir+"hhresults/*.hhr"):
+        seq_length = 0
         print(file)
         results_list = []
         pdb = file[-9:-5]
@@ -134,8 +139,12 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                 lines = hhrResult.read().splitlines()
                 result_array = []
                 for line in lines:
+                    length_re_result = length_re.match(line)
                     start_parse_result = start_parse_re.match(line)
                     end_parse_result = end_parse_re.match(line)
+
+                    if length_re_result:
+                        seq_length = int(length_re_result.group(1))
 
                     if end_parse_result:
                         parse_ctl = False
@@ -154,7 +163,14 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_family.split(".")[:-1])
 
+                        overlap_size = 0
+                        region_re_result = region_re.match(query_region)
+                        if region_re_result:
+                            overlap = int(region_result.group(2))-int(region_result.group(1))
                         # print(scop_3_levels)
+                        if overlap_size/seq_length < 80:
+                            continue
+
                         try:
                             # print(scop_3_levels)
                             if scop_family == scop_class:
@@ -190,7 +206,6 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
 def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
     result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
                  "eigen_thread/results/"
-    # print("hi")
     for file in glob.glob(result_dir+"genthreader_results/*.pgen.presults"):
         print(file)
         results_list = []
@@ -214,15 +229,21 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                 for line in lines:
                     entries = line.split()
                     scop_3_levels = ".".join(scop_class.split(".")[:-1])
-                    this_3_levels = ".".join(scop_list[entries[9]].split(".")[:-1])
+                    this_3_levels = ".".join(
+                                        scop_list[entries[9]].split(".")[:-1])
 
-                    #print(entries[9])
+                    # print(entries[9])
+                    overlap_size = int(entries[7])-int(entries[6])
+                    length = int(entries[8])
+                    if overlap_size/length < 80:
+                        continue
+
                     if scop_list[entries[9]] == scop_class:
-                         print("FAMILY MATCH")
+                        print("FAMILY MATCH")
                     elif scop_3_levels == this_3_levels:
-                         print("SUPERFAMILY MATCH")
+                        print("SUPERFAMILY MATCH")
                     else:
-                        #print(entries[9][0:5])
+                        # print(entries[9][0:5])
                         try:
                             result_array = [entries[2], entries[9], scop_list[entries[9]]]
                             results_list.append(result_array)
