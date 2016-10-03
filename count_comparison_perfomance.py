@@ -169,11 +169,11 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         region_re_result = region_re.match(query_region)
                         if region_re_result:
                             print(str(region_re_result.group(2))+" : "+str(region_re_result.group(1)))
-                            overlap = int(region_re_result.group(2))-int(region_re_result.group(1))
+                            overlap = float(region_re_result.group(2))-float(region_re_result.group(1))
                             print(str(overlap))
                         # print(scop_3_levels)
-                        print(str(overlap_size/seq_length))
-                        if overlap_size/seq_length < 0.7:
+                        print(str(float(overlap_size)/float(seq_length)))
+                        if float(overlap_size)/float(seq_length) < 0.7:
                             continue
 
                         try:
@@ -239,7 +239,7 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
 
                     # print(entries[9])
                     overlap_size = int(entries[7])-int(entries[6])
-                    length = int(entries[8])
+                    length = float(entries[8])
                     if overlap_size/length < 0.7:
                         continue
 
