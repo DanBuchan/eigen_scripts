@@ -168,7 +168,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         if region_re_result:
                             overlap = int(region_re_result.group(2))-int(region_re_result.group(1))
                         # print(scop_3_levels)
-                        if overlap_size/seq_length < 80:
+                        if overlap_size/seq_length < 70:
                             continue
 
                         try:
@@ -235,7 +235,7 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                     # print(entries[9])
                     overlap_size = int(entries[7])-int(entries[6])
                     length = int(entries[8])
-                    if overlap_size/length < 80:
+                    if overlap_size/length < 70:
                         continue
 
                     if scop_list[entries[9]] == scop_class:
