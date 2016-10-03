@@ -116,7 +116,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
     end_parse_re = re.compile(end_parse_pattern)
     length_pattern = r"^Match_columns\s(\d+)"
     length_re = re.compile(length_pattern)
-    region_pattern = "(\d+)-(\d+)"
+    region_pattern = r"(\d+)-(\d+)"
     region_re = re.compile(region_pattern)
     for file in glob.glob(result_dir+"hhresults/*.hhr"):
         seq_length = 0
