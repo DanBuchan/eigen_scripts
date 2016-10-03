@@ -27,6 +27,15 @@ benchmark_models = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
                    "eigen_thread/eigenthreader/structures/"
 
 
+def getFastaLength(file):
+    with open(file) as fasta_file:
+        for line in fasta_file:
+            if ">" in line:
+                continue
+            else:
+                return(len(line.rstrip()))
+
+
 def average_scores(result_dir, ending):
 
     if "eigentop" in ending:
@@ -55,7 +64,10 @@ def average_scores(result_dir, ending):
             pdb_id = file[-14:-9]
         else:
             pdb_id = file[-11:-6]
-        #print(pdb_id)
+        fasta_file = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+                     "eigen_thread/eigenthreader/seq_files/"+pdb_id+".fasta"
+        fasta_length = getFastaLength(fasta_file)
+        # print(pdb_id)
         eprint(file)
         with open(file) as scop_list_file:
             reader = csv.reader(skip_comments(scop_list_file), delimiter=',',
@@ -79,7 +91,7 @@ def average_scores(result_dir, ending):
                     #print(output.decode("utf-8"))
                     exit_code = process.wait()
                     tm_result = tm_re.search(output.decode("utf-8"))
-                    tm_results.append(float(tm_result.group(1)))
+                    tm_results.append(float(tm_result.group(1))/fasta_length)
                 except:
                     eprint("COULD NOT RUN TMalign")
 
@@ -134,27 +146,27 @@ print(hh_gdt_averages)
 
 print("level,eigen_average_tm,eigen_average_gdt,"
       "gen_average_tm,gen_average_gdt,hh_average_tm,hh_average_gdt")
-print("t1,"+str(round(sum(eigen_tm_averages[0]), 2))+"," +
-      str(round(sum(eigen_gdt_averages[0]), 2))+"," +
-      str(round(sum(gen_tm_averages[0]), 2))+"," +
-      str(round(sum(gen_gdt_averages[0]), 2))+"," +
-      str(round(sum(hh_tm_averages[0]), 2))+"," +
-      str(round(sum(hh_gdt_averages[0]), 2)))
-print("t2,"+str(round(sum(eigen_tm_averages[1])/2, 2))+"," +
-      str(round(sum(eigen_gdt_averages[1])/2, 2))+"," +
-      str(round(sum(gen_tm_averages[1])/2, 2))+"," +
-      str(round(sum(gen_gdt_averages[1])/2, 2))+"," +
-      str(round(sum(hh_tm_averages[1])/2, 2))+"," +
-      str(round(sum(hh_gdt_averages[1])/2, 2)))
-print("t5,"+str(round(sum(eigen_tm_averages[2])/5, 2))+"," +
-      str(round(sum(eigen_gdt_averages[2])/5, 2))+"," +
-      str(round(sum(gen_tm_averages[2])/5, 2))+"," +
-      str(round(sum(gen_gdt_averages[2])/5, 2))+"," +
-      str(round(sum(hh_tm_averages[2])/5, 2))+"," +
-      str(round(sum(hh_gdt_averages[2])/5, 2)))
-print("t10,"+str(round(sum(eigen_tm_averages[3])/10, 2))+"," +
-      str(round(sum(eigen_gdt_averages[3])/10, 2))+"," +
-      str(round(sum(gen_tm_averages[3])/10, 2))+"," +
-      str(round(sum(gen_gdt_averages[3])/10, 2))+"," +
-      str(round(sum(hh_tm_averages[3])/10, 2))+"," +
-      str(round(sum(hh_gdt_averages[3])/10, 2)))
+print("t1,"+str(round(mean(eigen_tm_averages[0]), 2))+"," +
+      str(round(mean(eigen_gdt_averages[0]), 2))+"," +
+      str(round(mean(gen_tm_averages[0]), 2))+"," +
+      str(round(mean(gen_gdt_averages[0]), 2))+"," +
+      str(round(mean(hh_tm_averages[0]), 2))+"," +
+      str(round(mean(hh_gdt_averages[0]), 2)))
+print("t2,"+str(round(mean(eigen_tm_averages[1]), 2))+"," +
+      str(round(mean(eigen_gdt_averages[1]), 2))+"," +
+      str(round(mean(gen_tm_averages[1]), 2))+"," +
+      str(round(mean(gen_gdt_averages[1]), 2))+"," +
+      str(round(mean(hh_tm_averages[1]), 2))+"," +
+      str(round(mean(hh_gdt_averages[1]), 2)))
+print("t5,"+str(round(mean(eigen_tm_averages[2]), 2))+"," +
+      str(round(mean(eigen_gdt_averages[2]), 2))+"," +
+      str(round(mean(gen_tm_averages[2]), 2))+"," +
+      str(round(mean(gen_gdt_averages[2]), 2))+"," +
+      str(round(mean(hh_tm_averages[2]), 2))+"," +
+      str(round(mean(hh_gdt_averages[2]), 2)))
+print("t10,"+str(round(mean(eigen_tm_averages[3]), 2))+"," +
+      str(round(mean(eigen_gdt_averages[3]), 2))+"," +
+      str(round(mean(gen_tm_averages[3]), 2))+"," +
+      str(round(mean(gen_gdt_averages[3]), 2))+"," +
+      str(round(mean(hh_tm_averages[3]), 2))+"," +
+      str(round(mean(hh_gdt_averages[3]), 2)))
