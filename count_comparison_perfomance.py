@@ -119,7 +119,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
     region_pattern = r"(\d+)-(\d+)"
     region_re = re.compile(region_pattern)
     for file in glob.glob(result_dir+"hhresults/*.hhr"):
-        seq_length = 0
+        seq_length = float(0)
         print(file)
         results_list = []
         pdb = file[-9:-5]
@@ -165,7 +165,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_family.split(".")[:-1])
 
-                        overlap_size = 0
+                        overlap_size = float(0)
                         region_re_result = region_re.match(query_region)
                         if region_re_result:
                             print(str(region_re_result.group(2))+" : "+str(region_re_result.group(1)))
