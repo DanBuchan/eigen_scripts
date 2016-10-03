@@ -67,7 +67,7 @@ def average_scores(result_dir, ending):
         fasta_file = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
                      "eigen_thread/eigenthreader/seq_files/"+pdb_id+".fasta"
         fasta_length = getFastaLength(fasta_file)
-        # print(pdb_id)
+        #print(pdb_id)
         eprint(file)
         with open(file) as scop_list_file:
             reader = csv.reader(skip_comments(scop_list_file), delimiter=',',
@@ -91,7 +91,7 @@ def average_scores(result_dir, ending):
                     #print(output.decode("utf-8"))
                     exit_code = process.wait()
                     tm_result = tm_re.search(output.decode("utf-8"))
-                    tm_results.append(float(tm_result.group(1))/fasta_length)
+                    tm_results.append(float(tm_result.group(1)))
                 except:
                     eprint("COULD NOT RUN TMalign")
 
@@ -106,7 +106,7 @@ def average_scores(result_dir, ending):
                     (output, err) = process.communicate()
                     exit_code = process.wait()
                     gdt_result = gdt_re.search(output.decode("utf-8"))
-                    gdt_results.append(float(gdt_result.group(1)))
+                    gdt_results.append(float(gdt_result.group(1))/fasta_length)
                 except:
                     eprint("COULD NOT RUN maxcluster")
 
