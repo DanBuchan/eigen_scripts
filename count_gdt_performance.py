@@ -143,12 +143,8 @@ def average_scores(result_dir, ending):
 
 print(hh_tm_averages)
 print(hh_gdt_averages)
-
 print("level,eigen_average_tm,eigen_average_gdt,"
       "gen_average_tm,gen_average_gdt,hh_average_tm,hh_average_gdt")
-print(len(hh_tm_averages[0]))
-print(len(hh_gdt_averages[0]))
-
 print("t1,"+str(round(mean(eigen_tm_averages[0]), 2))+"," +
       str(round(mean(eigen_gdt_averages[0]), 2))+"," +
       str(round(mean(gen_tm_averages[0]), 2))+"," +
