@@ -1,0 +1,34 @@
+Rev1
+
+X 1) Switch to ECOD seems redudant to this paper
+
+* 2) Change HHSearch to profile-profile search?
+X 3) As explained we find hits for most but our filtering procedure, to
+simulate analagous fold recognition eliminates most hits.
+* 4) add realign option
+X 5) Comparison to fragfold or confold? Redundant as we're not benchmarking
+a protein folding methodology
+
+Rev2
+X 1) Comparison to AL-eigen? Reviewer is mistaken that eigenTHREADER is
+more accurate that AL-eigen, speed increase is at a minor accuracy cost.
+
+Rev3
+X 1) Pfam families? 150 single domain proteins from the PSICOV benchmark
+We accept that typically a sequence search would find homologues and these
+can be used for homology modelling in the typicaly case. The paper attempts
+to simulate the case where our 150 proteins fail to find sequence homologues.
+
+We wish to stick with the 150 single domain proteins, rather than generate
+a new CASP based benchmarks, as they these are a well understood and
+accepted benchmark dataset in contact fold predcition and we understand they
+produce high quality contact maps when used with contemporary contact prediction
+methods (PSICOV etc..)
+X 2) Assessment at superfamily level, redundant as it's not what the paper is about
+* 3) revise table to make clearer?
+
+
+* 1) Cite paper as requested
+X 2) Compare with other threading methods, seems redundant. HHSearch and pGenTHREADER
+were chosen as representative of known high preforming threader and homology
+search methods. The paper isn't a benchmark of threading methods in general.
