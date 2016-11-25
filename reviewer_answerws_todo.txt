@@ -1,3 +1,177 @@
+----------------------------------------
+
+Here are the comments of the reviewers:
+
+----------------------------------------
+Reviewer: 1
+
+Comments to the Author
+
+
+This paper(and all threading papers) face a fundamental challenge. On one hand these
+ methods are challenged by steadily improved sequence search methods (using bigger
+  and bigger databases) and secondly they have lately been improved by ab-initio
+  protein structure prediction methods using contact prediction methods such as psicov.
+  This severely limits the usability of this (and all) threading methods. But clearly
+  it is not necessary that such methods are completely useless (but they might be).
+
+The most important contribution of this paper is that the " modified algorithm is
+expected to scale by n2 rather than 2n for the original Al-Eigen". Not sure this
+warrants a publication but I as one of the few users of AI-Eigen find it interesting.
+
+Anyhow I have a few major concerns regarding this paper.
+
+
+1) The author really should have tried to provide some quantification of how
+many analogous folds still exists. Here, unfortunately SCOP has not been updated
+for years. Therefore I would suggest that the authors would use ECOD. What can be
+done is to take all ECOD domains and try to quantify the number of templates that
+can be found to be structurally similar but not classified in the same X group (or
+possible in the same H group). I can understand if the authors think this is too
+much work, but something like this would really be needed to motivate the development
+of threading methods.
+
+2) Unfortunately the authors did not perform a fair comparison with hhsearch. The
+authors did a sequence-HMM comparison and not a much more sensitive HMM-HMM comparison.
+This makes this comparison rather meaningless. The authors should have built HMMs for
+their query proteisn. The authors used the following command for running hhsearch
+"hhsearch -i protein.fasta -o hhresults/protein.hhr -d scop70_1.75" and not
+"hhsearch -i protein.HMM -o hhresults/protein.hhr -d scop70_1.75. My assumption
+is that this will bring the performance up to at least similar with this method.
+
+
+3) The second problem with their hhserch is that they do not find a template
+for 75% of the targets. Not 100% certain why this is the case, but this is
+certainly not acceptable. You should always find at least one template.
+Possible reasons are that the -B or -E flags are not used correctly, or that
+the filter that they use to skip hits is incorrect. I would suggest to run with
+-E 10 -B 99999999 and not use the filter.
+
+4) HHsearch alignments can also be improved using the realign option. This was
+neither used from what I could read in the manuscript.
+
+
+5) Finally, the authors should compare if the threading method really provides
+any advantage to a folding method. The authors could just take their contact
+maps and run fragfold (or possibly better confold)
+
+
+
+Reviewer: 2
+
+Comments to the Author
+The authors presented a new method for fold recognition based on eigen-decoposition of contact map matrix. They improved the speed-up of a previous idea introducing a clever greedy approach.
+The second part of the method add more information to help in the recognition of distant proteins.
+I fond the method interesting and profitable for the entire community of structural bioinformaticians.
+The paper is well written and clearly presented. As far as the main text is concerned, I have no objections.
+I am almost sure that EigenTHREADER is both faster and more accurate than the previous Al-eigen. Furthermore, the quadratic increase makes it suitable for big proteins and more eigenvectors.
+However, if the authors add the not shown data reporting the comparison with Al-eigen in a supplementary file, this would be more interesting for some researchers and it makes the authors' statements stronger.
+
+Reviewer: 3
+
+Comments to the Author
+This manuscript presents a new method for protein fold recognition by comparing the
+predicted contact map of a query sequence to the contact map of a template.
+Experimental results presented in this manuscript show that the proposed method
+has some advantage over existing homology detection tools. Nevertheless, I would
+suggest that the authors revise the manuscript to make it more appealing to the
+community.
+
+Major concerns:
+
+1) This manuscript tested the proposed method using only a single dataset, i.e.,
+the 150 Pfam families.
+Many families in this set have a large number of sequence homologs.
+However, when a protein has a large number of sequence homologs, there is a good
+chance that it has a good template in PDB and thus, it is unnecessary to do fold
+recognition.
+I would suggest that the authors also test the proposed method on a set of proteins
+without many sequence homologs, e.g., a subset of recent CASP targets.
+
+2. It is fine not to evaluate the proposed method at the family level, but I do not
+think it is a good idea to ignore performance comparison at the superfamily level
+since current accuracy at superfamily level is still far away from perfect. I would
+like to suggest that the authors draw a picture similar to Fig 5 to show the
+performance comparison at the superfamily level.
+
+3. Some HHsearch results at the Table 1 is hard to understand. I do not understand
+why the authors set the TMscore and GDT-TS of HHsearch to 0 for the 150-26 targets.
+Why not simply just use the min and max scores calculated from the top templates
+ranked by HHsearch even if they may not have similar fold as the query protein?
+
+Minor concerns:
+
+1. This idea of using predicted contacts or distances to assist with homology
+detection/fold recognition is not brand new. I would suggest that the authors
+shall cite the following paper and do some brief discussion:
+http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003500 .
+
+2. It will make the manuscript better if the authors can compare their method with
+two other popular threading methods RaptorX and SPARKS.
+---------------------------------------- ----------------------------------------
+
+Here are the comments of the reviewers:
+
+----------------------------------------
+Reviewer: 1
+
+Comments to the Author
+
+
+This paper(and all threading papers) face a fundamental challenge. On one hand these methods are challenged by steadily improved sequence search methods (using bigger and bigger databases) and secondly they have lately been improved by ab-initio protein structure prediction methods using contact prediction methods such as psicov. This severely limits the usability of this (and all) threading methods. But clearly it is not necessary that such methods are completely useless (but they might be).
+
+The most important contribution of this paper is that the " modified algorithm is expected to scale by n2 rather than 2n for the original Al-Eigen". Not sure this warrants a publication but I as one of the few users of AI-Eigen find it interesting.
+
+Anyhow I have a few major concerns regarding this paper.
+
+
+1) The author really should have tried to provide some quantification of how many analogous folds still exists. Here, unfortunately SCOP has not been updated for years. Therefore I would suggest that the authors would use ECOD. What can be done is to take all ECOD domains and try to quantify the number of templates that can be found to be structurally similar but not classified in the same X group (or possible in the same H group). I can understand if the authors think this is too much work, but something like this would really be needed to motivate the development of threading methods.
+
+2) Unfortunately the authors did not perform a fair comparison with hhsearch. The authors did a sequence-HMM comparison and not a much more sensitive HMM-HMM comparison. This makes this comparison rather meaningless. The authors should have built HMMs for their query proteisn. The authors used the following command for running hhsearch "hhsearch -i protein.fasta -o hhresults/protein.hhr -d scop70_1.75" and not "hhsearch -i protein.HMM -o hhresults/protein.hhr -d scop70_1.75. My assumption is that this will bring the performance up to at least similar with this method.
+
+
+3) The second problem with their hhserch is that they do not find a template for 75% of the targets. Not 100% certain why this is the case, but this is certainly not acceptable. You should always find at least one template. Possible reasons are that the -B or -E flags are not used correctly, or that the filter that they use to skip hits is incorrect. I would suggest to run with -E 10 -B 99999999 and not use the filter.
+
+4) HHsearch alignments can also be improved using the realign option. This was neither used from what I could read in the manuscript.
+
+
+5) Finally, the authors should compare if the threading method really provides any advantage to a folding method. The authors could just take their contact maps and run fragfold (or possibly better confold)
+
+
+
+Reviewer: 2
+
+Comments to the Author
+The authors presented a new method for fold recognition based on eigen-decoposition of contact map matrix. They improved the speed-up of a previous idea introducing a clever greedy approach.
+The second part of the method add more information to help in the recognition of distant proteins.
+I fond the method interesting and profitable for the entire community of structural bioinformaticians.
+The paper is well written and clearly presented. As far as the main text is concerned, I have no objections.
+I am almost sure that EigenTHREADER is both faster and more accurate than the previous Al-eigen. Furthermore, the quadratic increase makes it suitable for big proteins and more eigenvectors.
+However, if the authors add the not shown data reporting the comparison with Al-eigen in a supplementary file, this would be more interesting for some researchers and it makes the authors' statements stronger.
+
+Reviewer: 3
+
+Comments to the Author
+This manuscript presents a new method for protein fold recognition by comparing the predicted contact map of a query sequence to the contact map of a template. Experimental results presented in this manuscript show that the proposed method has some advantage over existing homology detection tools. Nevertheless, I would suggest that the authors revise the manuscript to make it more appealing to the community.
+
+Major concerns:
+
+1) This manuscript tested the proposed method using only a single dataset, i.e., the 150 Pfam families.
+Many families in this set have a large number of sequence homologs.
+However, when a protein has a large number of sequence homologs, there is a good chance that it has a good template in PDB and thus, it is unnecessary to do fold recognition.
+I would suggest that the authors also test the proposed method on a set of proteins without many sequence homologs, e.g., a subset of recent CASP targets.
+
+2. It is fine not to evaluate the proposed method at the family level, but I do not think it is a good idea to ignore performance comparison at the superfamily level since current accuracy at superfamily level is still far away from perfect. I would like to suggest that the authors draw a picture similar to Fig 5 to show the performance comparison at the superfamily level.
+
+3. Some HHsearch results at the Table 1 is hard to understand. I do not understand why the authors set the TMscore and GDT-TS of HHsearch to 0 for the 150-26 targets. Why not simply just use the min and max scores calculated from the top templates ranked by HHsearch even if they may not have similar fold as the query protein?
+
+Minor concerns:
+
+1. This idea of using predicted contacts or distances to assist with homology detection/fold recognition is not brand new. I would suggest that the authors shall cite the following paper and do some brief discussion: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003500 .
+
+2. It will make the manuscript better if the authors can compare their method with two other popular threading methods RaptorX and SPARKS.
+----------------------------------------
+
 Rev1
 
 X 1) Switch to ECOD seems redudant to this paper

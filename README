@@ -85,3 +85,10 @@ to an appropriate subset output dir
 21) count_performance.py : change paths for the random/top .top files
 22) draw_top_performance_graph.R - draws the graphs for the top L and
 random L charts
+
+
+#### Adjunct
+For eignethreader optimisation only
+filter_eigen_output.py : grab the top 50 hits for each run, filtering out famil
+and superfamily matches, append the first correct analogous fold if not in
+the top 50.
