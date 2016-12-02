@@ -65,7 +65,7 @@ def get_fifty_eigen(omit_from_results_set, scop_list, bench_membership):
         if pdb_id in bench_membership:
             print(result_dir+"top_fifty_results/"+pdb_id+".top_fifty")
             out = open(result_dir+"top_fifty_results/"+pdb_id+".top_fifty",
-                        "w+")
+                       "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
             out.write("# SCOP FAMILY: "+scop_class+"\n")
@@ -75,7 +75,7 @@ def get_fifty_eigen(omit_from_results_set, scop_list, bench_membership):
                 lines.sort(key=lambda s: float(s[0]), reverse=True)
                 # print(lines[len(lines)-5:len(lines)])
                 for line in lines:
-                    #print(line)
+                    # print(line)
                     result_array = []
                     try:
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
@@ -83,9 +83,9 @@ def get_fifty_eigen(omit_from_results_set, scop_list, bench_membership):
                         # print(scop_3_levels)
                         scop_2_levels = ".".join(scop_class.split(".")[:-2])
                         this_2_levels = ".".join(scop_list[line[3]].split(".")[:-2])
-                        #print(scop_2_levels)
-                        #print(this_2_levels)
-                        #print(fold_found)
+                        # print(scop_2_levels)
+                        # print(this_2_levels)
+                        # print(fold_found)
 
                         if scop_list[line[3]] == scop_class:
                             pass
@@ -100,12 +100,14 @@ def get_fifty_eigen(omit_from_results_set, scop_list, bench_membership):
                         else:
                             if line_count < 50:
                                 out.write(line[0]+" "+line[1]+" "+line[2]+" "+line[3]+" "+scop_list[line[3]]+"\n")
-                                line_count+=1
+                                line_count += 1
 
                     except:
                         print("Huh")
                 for line in extra_hits:
                     out.write(line[0]+" "+line[1]+" "+line[2]+" "+line[3]+" "+scop_list[line[3]]+"\n")
+        else:
+            print("MISSING: "+pdb_id)
         #     # pp.pprint(results_list)
         #     results = results_list[len(results_list)-10:len(results_list)]
         #     # pp.pprint(results)

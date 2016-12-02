@@ -9,28 +9,39 @@
 run_dssp.py - run dssp over a dir of pdb files : DEPRECATED
 
 1) run_strsum_eigen.py - runs the eigengthreader tdb generator over a db of pdb and dssp files
-                      Uses the HHSearch_overlap dir as the sourcece of which
+                      Uses the HHSearch_overlap dir as the source of which
                       files to generate
+                      Update: Scop70 1.75 12/nov/2016
+                      http://wwwuser.gwdg.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/
+                      13,730 folds
 2) equalise_fold_libs.py - read the HHSeach lib and delete anything that isn't
                            in the et_data lib
+                      13,613 folds
 
 4) run_blast.py - runs blastp over a dir of fasta files
 
+Foldlibs now at:
+/mnt/bioinf/archive0/eigen_thread/et_data/
+/mnt/bioinf/archive0/eigen_thread/HHSearch_hmm_complete/
 
 Sorting the fold libs:
 
 
 Removing homologues from fold libs:
+
+**** DEPRECATED: No longer removing blast relatives from the foldlibs
 3) extract_fasta.py - extracts the fasta files from the HHSearch hhms
                    hhsearch.fasta
 5) remove_homolgues.py - removes the homologues from the fold libs found in the blast run
+**** DEPRECATED
+
 6) find_homologues.py - read the scop classification and identify the SCOP
                      structural homologues for the PSICOV benchmark set
                      pdb_scop_class.txt: pdb Domain ID to SCOP class for ALL
                                          classified pdb chains
                      scop_class_members.txt: SCOP class to a list of domains
                                              included in that class
-                     scop_superfamil_members.txt: SCOP superfamily to list of
+                     scop_superfamily_members.txt: SCOP superfamily to list of
                                                   domain ids
                      non_redundant_list.txt: A list of all the benchmark pdb
                                              ids AND ids of their immediate
@@ -42,18 +53,29 @@ Removing homologues from fold libs:
                      benchmark_superfamily_members.txt :
                      benchmark_domain_id.txt : scop domain IDS for the benchmark
                                               set
-
 7) run_eigen_threader_morecambe.py: run it changing the t value from 1 to 20 (c=10)
 8) run_eigen_threader_morecambe.py: run it changing the c value from 1 to 20 (t=20)
+Results currently on morecambe2
+/home/dbuchan/eigen_benchmark/results/
+
 9) Walkthrough HHSearch_build.txt instructions, to generate the HHSearch comparison data
-10) then run genthreader with the et_reduced lib run_genthreader.py. Edit GenThreader.sh
+HHSearch/HHBlits library at
+/scratch1/NOT_BACKED_UP/dbuchan/HHSearch_eigen/
+Results
+/scratch0/NOT_BACKED_UP/dbuchan/hhresults/paper_revision/
+
+10) then run genthreader with the et_foldlib lib run_genthreader.py. Edit GenThreader.sh
 for the fold lib and list
+for i in `ls /scratch1/NOT_BACKED_UP/dbuchan/eigenthreader/seq_files/ | sed -e 's/\.fasta//'`; do echo $i; ./GenThreader.sh -i /scratch1/NOT_BACKED_UP/dbuchan/eigenthreader/seq_files/$i.fasta -j $i -s; done
+
+results at:
+/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/results_new/
 
 Process benchmark data:
 11) count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
                                  outputs the t1, t2, t5 and t10 performances
                                  (skipping the immediate structural homologues
-                                 as given by SCOP), t and c values changed by editing
+                                 aZZs given by SCOP), t and c values changed by editing
 12) count_performance.py- work out the t1,t2,t5 and t10 performance for graphing.
                       c and t values changed by editing
 13) draw_benchmark_performance_graph.R - takes the eigenvector performance numbers

@@ -7,7 +7,7 @@ start_re = re.compile(start_pattern)
 print_line = False
 f2 = None
 
-for file in glob.glob("/scratch0/NOT_BACKED_UP/dbuchan/hhresults/alt/*.pdb"):
+for file in glob.glob("/scratch0/NOT_BACKED_UP/dbuchan/hhresults/paper_revision/*.pdb"):
     f1 = open(file, "r")
     pdb = file[-9:-4]
     print(pdb)
@@ -17,7 +17,7 @@ for file in glob.glob("/scratch0/NOT_BACKED_UP/dbuchan/hhresults/alt/*.pdb"):
             print_line = True
             #print(line)
             #print(pdb)
-            f2 = open("/scratch0/NOT_BACKED_UP/dbuchan/hhresults/alt/models/"+pdb+"_"+start_result.group(1)+".model.pdb", "w")
+            f2 = open("/scratch0/NOT_BACKED_UP/dbuchan/hhresults/paper_revision/models/"+pdb+"_"+start_result.group(1)+".model.pdb", "w")
         if print_line == True:
             f2.write(line)
         if "END" in line:
