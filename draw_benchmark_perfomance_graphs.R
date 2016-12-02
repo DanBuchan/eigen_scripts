@@ -1,8 +1,8 @@
 library(ggplot2)
 library(reshape2) 
 library(Rmisc)
-vector_performance <- read.csv(file="/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/eigenvectors_performance.csv", header=TRUE, check.names=FALSE, strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
-distance_performance <- read.csv(file="/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/distance_performance.csv", header=TRUE, check.names=FALSE, strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
+vector_performance <- read.csv(file="/mnt/bioinf/archive0/eigen_thread/results/eigenvectors_performance.csv", header=TRUE, check.names=FALSE, strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
+distance_performance <- read.csv(file="/mnt/bioinf/archive0/eigen_thread/results/distance_performance.csv", header=TRUE, check.names=FALSE, strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
 
 vector_performance$top<-as.factor(vector_performance$top)
 

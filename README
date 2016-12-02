@@ -84,6 +84,8 @@ Process benchmark data:
 
 Check graphs and then run optimised eigenthreader!!!!
 
+
+
 14) count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
                                  and outputs the best 10 results for each method
                                  see /processed_comparison
