@@ -118,7 +118,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
     length_re = re.compile(length_pattern)
     region_pattern = r"(\d+)-(\d+)"
     region_re = re.compile(region_pattern)
-    for file in glob.glob(result_dir+"hhresults/*.hhr"):
+    for file in glob.glob(result_dir+"hhresults/*.hhr_modelled"):
         seq_length = float(0)
         print(file)
         results_list = []
@@ -263,5 +263,5 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         #break
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
-# parse_hh(omit_from_results_set, scop_list, bench_membership)
-# parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
+parse_hh(omit_from_results_set, scop_list, bench_membership)
+parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
