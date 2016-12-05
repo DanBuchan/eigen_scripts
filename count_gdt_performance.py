@@ -19,11 +19,11 @@ def skip_comments(iterable):
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/" \
+result_dir = "/mnt/bioinf/archive0/eigen_thread/" \
              "results/processed_comparison/"
-eigen_models = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+eigen_models = "/mnt/bioinf/archive0/" \
                "eigen_thread/results/optimised_t20_c9/models/"
-benchmark_models = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+benchmark_models = "/mnt/bioinf/archive0/" \
                    "eigen_thread/eigenthreader/structures/"
 
 
@@ -39,13 +39,13 @@ def getFastaLength(file):
 def average_scores(result_dir, ending):
 
     if "eigentop" in ending:
-        models_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+        models_dir = "/mnt/bioinf/archive0/" \
                      "eigen_thread/results/optimised_t20_c9/models/"
     if "genthtop" in ending:
-        models_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+        models_dir = "/mnt/bioinf/archive0/" \
                      "eigen_thread/results/genthreader_results/models/"
     if "hhtop" in ending:
-        models_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+        models_dir = "/mnt/bioinf/archive0/" \
                      "eigen_thread/results/hhresults/models/"
 
     tm_pattern = "\nTM-score=\s+(.+?)\s+\("
@@ -64,7 +64,7 @@ def average_scores(result_dir, ending):
             pdb_id = file[-14:-9]
         else:
             pdb_id = file[-11:-6]
-        fasta_file = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+        fasta_file = "/mnt/bioinf/archive0/" \
                      "eigen_thread/eigenthreader/seq_files/"+pdb_id+".fasta"
         fasta_length = getFastaLength(fasta_file)
         #print(pdb_id)

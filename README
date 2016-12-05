@@ -87,7 +87,6 @@ Check graphs and then run optimised eigenthreader!!!!
 14) count_comparison_perfomance.py - takes the genth, hhsearch and optimal eig
                                  and outputs the best 10 results for each method
                                  see /processed_comparison
-
 15) sum_comparison_performance.py - work out the t1,t2,t5 and t10 performance
                                   for each method
 
