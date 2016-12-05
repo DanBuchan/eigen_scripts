@@ -12,7 +12,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 def process_results(t1_results, t2_results, t5_results, t10_results,
                     file_ending):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+    result_dir = "/mnt/bioinf/archive0/" \
                  "eigen_thread/results/processed_comparison/"
     pdb_pattern = r"#\sPDB\sID:\s(.+)"
     scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
