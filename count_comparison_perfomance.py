@@ -57,8 +57,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
     result_dir = "/mnt/bioinf/archive0/" \
                  "eigen_thread/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
-        # if "1fvk" not in file:
-        #     continue
+        if "1fvk" not in file:
+             continue
         print(file)
         results_list = []
         pdb = file[-9:-5]
@@ -263,5 +263,5 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         #break
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
-parse_hh(omit_from_results_set, scop_list, bench_membership)
-parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
+# parse_hh(omit_from_results_set, scop_list, bench_membership)
+# parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
