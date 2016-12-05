@@ -110,6 +110,9 @@ to an appropriate subset output dir
 22) draw_top_performance_graph.R - draws the graphs for the top L and
 random L charts
 
+### TO DO
+Count the number of folds that could be hit in the fold lib for each
+domain
 
 #### Adjunct
 For eignethreader optimisation only
