@@ -122,9 +122,9 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
         seq_length = float(0)
         print(file)
         results_list = []
-        pdb = file[-9:-5]
+        pdb = file[-18:-14]
         print(pdb)
-        chain = file[-5]
+        chain = file[-14]
         pdb_id = pdb+chain
         print(pdb_id)
         parse_ctl = False
