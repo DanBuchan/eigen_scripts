@@ -25,10 +25,11 @@ accepted benchmark dataset in contact fold predcition and we understand they
 produce high quality contact maps when used with contemporary contact prediction
 methods (PSICOV etc..)
 X 2) Assessment at superfamily level, redundant as it's not what the paper is about
-* 3) revise table to make clearer?
+X 3) We can not use a min or max score in cases where there are no valid hits
+(as per our filtering criteria)
 
 
-* 1) Cite paper as requested
+BING 1) Cite paper as requested
 X 2) Compare with other threading methods, seems redundant. HHSearch and pGenTHREADER
 were chosen as representative of known high preforming threader and homology
 search methods. The paper isn't a benchmark of threading methods in general.
