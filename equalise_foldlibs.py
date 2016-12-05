@@ -1,9 +1,9 @@
-import glob
+simport glob
 import os.path
 import os
 
-hhlib = '/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/HHSearch_hmm_complete/'
-etlib = '/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/et_data/'
+hhlib = '/mnt/bioinf/archive0/eigen_thread/HHSearch_hmm_complete/'
+etlib = '/mnt/bioinf/archive0/eigen_thread/et_data/'
 
 for file in glob.glob(hhlib+"*.hhm"):
     #print(file)

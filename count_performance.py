@@ -9,7 +9,7 @@ import math
 from collections import defaultdict
 pp = pprint.PrettyPrinter(indent=4)
 
-result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/results/random"
+result_dir = "/mnt/bioinf/archive0/eigen_thread/results/eigenvectors/"
 pdb_pattern = r"#\sPDB\sID:\s(.+)"
 scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
 result_pattern = r".+,.+,(.+)"
@@ -27,10 +27,10 @@ t2_results = defaultdict(dict)
 t5_results = defaultdict(dict)
 t10_results = defaultdict(dict)
 
-for directory in glob.glob(result_dir+"/L*"):
+for directory in glob.glob(result_dir+"/t*"):
     param = directory[-3:]
-    param = int(param.lstrip("/L"))
-    # print(param)
+    param = int(param.lstrip("/t"))
+    #print(param)
     t1_results[param]["class"] = 0
     t2_results[param]["class"] = 0
     t5_results[param]["class"] = 0
