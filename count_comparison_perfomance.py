@@ -8,7 +8,7 @@ pp = pprint.PrettyPrinter(indent=4)
 omit_from_results_set = {}
 omit_from_results_set_pdb = {}
 
-with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
+with open("/mnt/bioinf/archive0/eigen_thread/"
           "scop_data/non_redundant_list_superfamily_level.txt") as non_redundant:
     for line in non_redundant:
         line = line.rstrip()
@@ -21,7 +21,7 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
 # get the list of scop folds
 scop_list = {}
 pdb_list = {}
-with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
+with open("/mnt/bioinf/archive0/eigen_thread/"
           "scop_data/pdb_scop_class.txt") as scop_list_file:
     reader = csv.reader(scop_list_file, delimiter=',', quotechar='"')
     for row in reader:
@@ -41,7 +41,7 @@ with open("/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/"
 # exit()
 
 bench_membership = {}
-with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/'
+with open('/mnt/bioinf/archive0/eigen_thread/'
           'scop_data/benchmark_family_members.txt') as benchfile:
     reader = csv.reader(benchfile, delimiter=',', quotechar='"')
     for row in reader:
@@ -54,7 +54,7 @@ with open('/cs/research/bioinf/home1/green/dbuchan/archive0/eigen_thread/'
 
 
 def parse_eigen(omit_from_results_set, scop_list, bench_membership):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+    result_dir = "/mnt/bioinf/archive0/" \
                  "eigen_thread/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
         # if "1fvk" not in file:
@@ -108,7 +108,7 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
 
 
 def parse_hh(omit_from_results_set, scop_list, bench_membership):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0" \
+    result_dir = "/mnt/bioinf/archive0" \
                  "/eigen_thread/results/"
     start_parse_pattern = r"^\sNo\sHit"
     start_parse_re = re.compile(start_parse_pattern)
@@ -206,7 +206,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
 
 
 def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
-    result_dir = "/cs/research/bioinf/home1/green/dbuchan/archive0/" \
+    result_dir = "/mnt/bioinf/archive0/" \
                  "eigen_thread/results/"
     for file in glob.glob(result_dir+"genthreader_results/*.pgen.presults"):
         print(file)
