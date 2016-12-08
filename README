@@ -75,7 +75,10 @@ Process benchmark data:
 11) count_eigenvector_benchmark.py - Takes the eigen_vector benchmark data and
                                  outputs the t1, t2, t5 and t10 performances
                                  (skipping the immediate structural homologues
-                                 aZZs given by SCOP), t and c values changed by editing
+                                 aZZs given by SCOP), t and c values changed by
+                                 editing.
+                                 To ensure we are only looking at good models
+                                 an overlap of 40% is required
 12) count_performance.py- work out the t1,t2,t5 and t10 performance for graphing.
                       c and t values changed by editing
 13) draw_benchmark_performance_graph.R - takes the eigenvector performance numbers

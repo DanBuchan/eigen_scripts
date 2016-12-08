@@ -48,17 +48,16 @@ with open('/mnt/bioinf/archive0/eigen_thread/'
         bench_membership[row[0]] = row[1]
 
 # pp.pprint(bench_membership)
-# exit()
 
 # Parse eigenresults
 
 
 def parse_eigen(omit_from_results_set, scop_list, bench_membership):
-    result_dir = "/mnt/bioinf/archive0/" \
-                 "eigen_thread/results/"
+    result_dir = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
-        #if "1fvk" not in file:
-        #     continue
+    #for file in glob.glob(result_dir+"c1/*.out"):
+        if "1fvk" not in file:
+            continue
         print(file)
         results_list = []
         pdb = file[-9:-5]
@@ -80,6 +79,9 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                 # print(lines[len(lines)-5:len(lines)])
                 for line in lines:
                     result_array = []
+                    if float(line[4]) < 0.4:
+                        continue
+
                     try:
                         scop_3_levels = ".".join(scop_class.split(".")[:-1])
                         this_3_levels = ".".join(scop_list[line[6]].split(".")[:-1])
@@ -170,7 +172,7 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                         # print(scop_3_levels)
 
                         percentage = overlap_size/seq_length
-                        if percentage < 0.7:
+                        if percentage < 0.4:
                             continue
 
                         try:
@@ -237,7 +239,7 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                     # print(entries[9])
                     overlap_size = int(entries[7])-int(entries[6])
                     length = float(entries[8])
-                    if overlap_size/length < 0.7:
+                    if overlap_size/length < 0.4:
                         continue
 
                     if scop_list[entries[9]] == scop_class:
@@ -263,5 +265,6 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         #break
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
+exit()
 parse_hh(omit_from_results_set, scop_list, bench_membership)
 parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
