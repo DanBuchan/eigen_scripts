@@ -56,8 +56,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
     result_dir = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/"
     for file in glob.glob(result_dir+"optimised_t20_c9/*.out"):
     #for file in glob.glob(result_dir+"c1/*.out"):
-        if "1fvk" not in file:
-            continue
+        # if "1fvk" not in file:
+        #     continue
         print(file)
         results_list = []
         pdb = file[-9:-5]
