@@ -265,6 +265,6 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         #break
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
-exit()
+#exit()
 parse_hh(omit_from_results_set, scop_list, bench_membership)
 parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
