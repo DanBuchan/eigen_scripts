@@ -75,4 +75,4 @@ for pdb in fold_lib_remaining:
         # # print(pdb_fold+" : "+member_fold)
 
 for pdb in fold_count:
-    print(pdb+" : "+str(fold_count[pdb]))
+    print(pdb+","+str(fold_count[pdb]))
