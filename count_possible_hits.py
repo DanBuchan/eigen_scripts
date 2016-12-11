@@ -46,9 +46,9 @@ print("Bench members"+str(len(bench_prots["1abaA"])))
 fold_lib_remaining = defaultdict(list)
 # count_folds = 0
 for pdb in bench_prots:
-    if "1abaA" not in pdb:
-        continue
-    print(pdb)
+    # if "1abaA" not in pdb:
+    #     continue
+    # print(pdb)
     for file in glob.glob("/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/et_foldlib/*.eig"):
         scopid = file[-11:-4]
         if scopid not in bench_prots[pdb]:
