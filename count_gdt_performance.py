@@ -82,7 +82,7 @@ def average_scores(result_dir, ending):
                 eprint(benchmark_models+native_struct)
                 eprint(models_dir+model)
                 try:
-                    cmd = "/cs/research/bioinf/home1/green/dbuchan/bin/TMalign " + \
+                    cmd = "/home/dbuchan/bin/TMalign " + \
                         models_dir+model+" " + \
                         benchmark_models+native_struct
                     # print(cmd)
@@ -97,7 +97,7 @@ def average_scores(result_dir, ending):
 
 
                 try:
-                    cmd = "/cs/research/bioinf/home1/green/dbuchan/bin/maxcluster64bit" + \
+                    cmd = "/home/dbuchan/bin/maxcluster64bit" + \
                         " -e "+models_dir+model + \
                         " -p "+benchmark_models+native_struct + \
                         " -in -gdt"
