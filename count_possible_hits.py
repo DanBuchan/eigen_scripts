@@ -69,7 +69,7 @@ for pdb in fold_lib_remaining:
     for scop_id in fold_lib_remaining[pdb]:
         member_fold = ".".join(scop_list[scop_id].split(".")[0:2])
         print(pdb+" "+pdb_fold+" : "+scop_id+" "+member_fold)
-        if pdb_fold is member_fold:
+        if pdb_fold in member_fold:
              fold_count[pdb] += 1
         # # print(pdb_fold+" : "+member_fold)
 
