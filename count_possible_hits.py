@@ -38,7 +38,7 @@ with open("/mnt/bioinf/archive0/eigen_thread/scop_data/benchmark_family_members.
 for prot in bench_prots:
     bench_prots[prot] = list(set(bench_prots[prot]))
 
-print("Bench members"+str(len(bench_prots["1abaA"])))
+#print("Bench members"+str(len(bench_prots["1abaA"])))
 # bench_prots a list of the benchmark proteins with all their superfamily and family members
 # benchmembershop a list of benchmark pdb ID to scop class (x.x.x.x)
 
@@ -59,7 +59,7 @@ for pdb in bench_prots:
             #     count_folds += 1
 
 # print(count_folds)
-print(len(fold_lib_remaining["1abaA"]))
+#print(len(fold_lib_remaining["1abaA"]))
 # fold_lib_remaining, for each benchmark pdb id we have a list of all the
 # folds in the fold_lib that WERE NOT in the superfamily/family set.
 # now count up howmany of the proteins have the same fold_lib
@@ -70,8 +70,9 @@ for pdb in fold_lib_remaining:
         member_fold = ".".join(scop_list[scop_id].split(".")[0:2])
         # print(pdb+" "+pdb_fold+" : "+scop_id+" "+member_fold)
         if pdb_fold in member_fold:
-            print(pdb+" "+pdb_fold+" : "+scop_id+" "+member_fold)
+            #print(pdb+" "+pdb_fold+" : "+scop_id+" "+member_fold)
             fold_count[pdb] += 1
         # # print(pdb_fold+" : "+member_fold)
 
-print(fold_count)
+for pdb in fold_count:
+    print(pdb+" : "+fold_count)
