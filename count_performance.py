@@ -27,9 +27,9 @@ t2_results = defaultdict(dict)
 t5_results = defaultdict(dict)
 t10_results = defaultdict(dict)
 
-for directory in glob.glob(result_dir+"/t*"):
+for directory in glob.glob(result_dir+"/c*"):
     param = directory[-3:]
-    param = int(param.lstrip("/t"))
+    param = int(param.lstrip("/c"))
     #print(param)
     t1_results[param]["class"] = 0
     t2_results[param]["class"] = 0

@@ -1,0 +1,5 @@
+level,eigen_average_tm,eigen_average_gdt,gen_average_tm,gen_average_gdt,hh_average_tm,hh_average_gdt
+t1,0.76,1.22,0.72,0.96,0.83,1.45
+t2,0.75,1.21,0.72,1.0,0.83,1.51
+t5,0.77,1.2,0.69,1.08,0.8,1.57
+t10,0.77,1.17,0.67,1.04,0.75,1.35

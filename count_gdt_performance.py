@@ -57,7 +57,7 @@ def average_scores(result_dir, ending):
     gdt_averages = [[], [], [], []]
     pdb_id = ''
     for file in glob.glob(result_dir+ending):
-        # if "1aoe" not in file:
+        # if "3dqgA" not in file:
         #     continue
 
         if "eigentop" in ending or "genthtop" in ending:
@@ -85,7 +85,7 @@ def average_scores(result_dir, ending):
                     cmd = "/home/dbuchan/bin/TMalign " + \
                         models_dir+model+" " + \
                         benchmark_models+native_struct
-                    # print(cmd)
+                    eprint(cmd)
                     process = Popen(shlex.split(cmd), stdout=PIPE)
                     (output, err) = process.communicate()
                     #print(output.decode("utf-8"))
@@ -101,12 +101,13 @@ def average_scores(result_dir, ending):
                         " -e "+models_dir+model + \
                         " -p "+benchmark_models+native_struct + \
                         " -in -gdt"
-                    # print(cmd)
+                    eprint(cmd)
                     process = Popen(shlex.split(cmd), stdout=PIPE)
                     (output, err) = process.communicate()
                     exit_code = process.wait()
                     gdt_result = gdt_re.search(output.decode("utf-8"))
-                    gdt_results.append(float(gdt_result.group(1))/fasta_length)
+                    gdt_results.append(float(gdt_result.group(1)))
+                    #gdt_results.append(float(gdt_result.group(1))/fasta_length)
                 except:
                     eprint("COULD NOT RUN maxcluster")
 
@@ -116,21 +117,21 @@ def average_scores(result_dir, ending):
             if len(tm_results) > 0:
                 tm_averages[0].append(tm_results[0])
             if len(tm_results) > 1:
-                tm_averages[1].append(mean(tm_results[0:2]))
+                tm_averages[1].append(min(tm_results[0:2]))
             if len(tm_results) > 4:
-                tm_averages[2].append(mean(tm_results[0:5]))
+                tm_averages[2].append(min(tm_results[0:5]))
             if len(tm_results) > 9:
-                tm_averages[3].append(mean(tm_results))
+                tm_averages[3].append(min(tm_results))
 
             if len(gdt_results) > 0:
                 gdt_averages[0].append(gdt_results[0])
             if len(gdt_results) > 1:
-                gdt_averages[1].append(mean(gdt_results[0:2]))
+                gdt_averages[1].append(min(gdt_results[0:2]))
             if len(gdt_results) > 4:
-                gdt_averages[2].append(mean(gdt_results[0:5]))
+                gdt_averages[2].append(min(gdt_results[0:5]))
             if len(gdt_results) > 9:
-                gdt_averages[3].append(mean(gdt_results))
-        #break
+                gdt_averages[3].append(min(gdt_results))
+        # break
 
     return(tm_averages, gdt_averages)
 
@@ -141,8 +142,8 @@ def average_scores(result_dir, ending):
 (hh_tm_averages, hh_gdt_averages) = average_scores(result_dir,
                                                    "*.hhtop")
 
-print(hh_tm_averages)
-print(hh_gdt_averages)
+# print(hh_tm_averages)
+# print(hh_gdt_averages)
 print("level,eigen_average_tm,eigen_average_gdt,"
       "gen_average_tm,gen_average_gdt,hh_average_tm,hh_average_gdt")
 print("t1,"+str(round(mean(eigen_tm_averages[0]), 2))+"," +

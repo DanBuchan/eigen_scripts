@@ -13,7 +13,7 @@ pp = pprint.PrettyPrinter(indent=4)
 def process_results(t1_results, t2_results, t5_results, t10_results,
                     file_ending):
     result_dir = "/mnt/bioinf/archive0/" \
-                 "eigen_thread/results/processed_comparison/"
+                 "eigen_thread/results/processed_comparison_family/"
     pdb_pattern = r"#\sPDB\sID:\s(.+)"
     scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
     result_pattern = r".+,.+,.+"
@@ -75,7 +75,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
                 entries = entries[2:]
                 # print(entries)
                 for entry in entries:
-                    # print(entry)
+                    #print(entry)
                     this_class, this_fold, this_superf, this_family = entry.split(".")
                     if this_class == scop_class and result_count < class_found:
                         class_found = result_count
@@ -135,6 +135,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
         if superf_found <= 10 and superf_found > 5:
             t10_results[param]["superf"] += 1
 
+        #print(family_found)
         if family_found == 1:
             t1_results[param]["family"] += 1
             t2_results[param]["family"] += 1

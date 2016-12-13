@@ -17,7 +17,7 @@
 #Note, further to reviewer comments we have edited this command to perform a
 #more sensitive HHblits search
 #run the hhm vs hhm HHSearches
-> for i in `ls /scratch1/NOT_BACKED_UP/dbuchan/eigenthreader/seq_files/ | sed -e 's/\.fasta//'`; do hhblits -B 99999999 -Z 99999999 -p 0 -i /scratch1/NOT_BACKED_UP/dbuchan/eigenthreader/seq_files/$i.fasta -o /scratch0/NOT_BACKED_UP/dbuchan/hhresults/paper_revision/$i.hhr -d scop70_1.75; done
+> for i in `ls /scratch1/NOT_BACKED_UP/dbuchan/eigenthreader/seq_files/ | sed -e 's/\.fasta//'`; do hhblits -B 99999999 -Z 99999999 -p 0 -E 1E+10 -i /scratch1/NOT_BACKED_UP/dbuchan/eigenthreader/seq_files/$i.fasta -o /scratch0/NOT_BACKED_UP/dbuchan/hhresults/results_tweak/$i.hhr -d scop70_1.75; done
 
 #Retrieve the pdbs for scop 1.75 that weren't in our local PDB copy as they had
 #been deprecated

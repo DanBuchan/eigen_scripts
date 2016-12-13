@@ -9,7 +9,7 @@ omit_from_results_set = {}
 omit_from_results_set_pdb = {}
 
 with open("/mnt/bioinf/archive0/eigen_thread/"
-          "scop_data/non_redundant_list_superfamily_level.txt") as non_redundant:
+          "scop_data/non_redundant_list_family_level.txt") as non_redundant:
     for line in non_redundant:
         line = line.rstrip()
         omit_from_results_set[line] = 1
@@ -66,8 +66,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
         pdb_id = pdb+chain
         print(pdb_id)
         if pdb_id in bench_membership:
-            print(result_dir+"processed_comparison/"+pdb_id+".eigentop")
-            out = open(result_dir+"processed_comparison/"+pdb_id+".eigentop",
+            print(result_dir+"processed_comparison_family/"+pdb_id+".eigentop")
+            out = open(result_dir+"processed_comparison_family/"+pdb_id+".eigentop",
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
@@ -88,8 +88,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
                         # print(scop_3_levels)
                         if scop_list[line[6]] == scop_class:
                             print("FAMILY MATCH")
-                        elif scop_3_levels == this_3_levels:
-                            print("SUPERFAMILY MATCH")
+                        # elif scop_3_levels == this_3_levels:
+                            # print("SUPERFAMILY MATCH")
                         else:
                             result_array = [line[0], line[6], scop_list[line[6]]]
                             results_list.append(result_array)
@@ -131,8 +131,8 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
         print(pdb_id)
         parse_ctl = False
         if pdb_id in bench_membership:
-            print(result_dir+"processed_comparison/"+pdb_id+".hhtop")
-            out = open(result_dir+"processed_comparison/"+pdb_id+".hhtop", "w+")
+            print(result_dir+"processed_comparison_family/"+pdb_id+".hhtop")
+            out = open(result_dir+"processed_comparison_family/"+pdb_id+".hhtop", "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
@@ -179,8 +179,8 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
                             # print(scop_3_levels)
                             if scop_family == scop_class:
                                 print("FAMILY MATCH")
-                            elif scop_3_levels == this_3_levels:
-                                print("SUPERFAMILY MATCH")
+                            # elif scop_3_levels == this_3_levels:
+                                # print("SUPERFAMILY MATCH")
                             else:
                                 result_array = [score, domain_id, scop_family]
                                 results_list.append(result_array)
@@ -219,8 +219,8 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         pdb_id = pdb+chain
         print(pdb_id)
         if pdb_id in bench_membership:
-            print(result_dir+"processed_comparison/"+pdb_id+".genthtop")
-            out = open(result_dir+"processed_comparison/"+pdb_id+".genthtop",
+            print(result_dir+"processed_comparison_family/"+pdb_id+".genthtop")
+            out = open(result_dir+"processed_comparison_family/"+pdb_id+".genthtop",
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
@@ -241,11 +241,11 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
                     length = float(entries[8])
                     if overlap_size/length < 0.4:
                         continue
-
+                    #
                     if scop_list[entries[9]] == scop_class:
                         print("FAMILY MATCH")
-                    elif scop_3_levels == this_3_levels:
-                        print("SUPERFAMILY MATCH")
+                    # elif scop_3_levels == this_3_levels:
+                        # print("SUPERFAMILY MATCH")
                     else:
                         # print(entries[9][0:5])
                         try:
