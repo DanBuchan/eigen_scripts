@@ -1,4 +1,4 @@
-
+Cp
 from __future__ import print_function
 import glob
 import pprint
@@ -7,6 +7,7 @@ import re
 from subprocess import Popen, PIPE
 import shlex
 from statistics import mean
+from statistics import variance
 import sys
 
 
@@ -170,3 +171,31 @@ print("t10,"+str(round(mean(eigen_tm_averages[3]), 2))+"," +
       str(round(mean(gen_gdt_averages[3]), 2))+"," +
       str(round(mean(hh_tm_averages[3]), 2))+"," +
       str(round(mean(hh_gdt_averages[3]), 2)))
+
+
+print("level,eigen_variance_tm,eigen_variance_gdt,"
+      "gen_variance_tm,gen_variance_gdt,hh_variance_tm,hh_variance_gdt")
+print("t1,"+str(round(variance(eigen_tm_averages[0]), 2))+"," +
+      str(round(variance(eigen_gdt_averages[0]), 2))+"," +
+      str(round(variance(gen_tm_averages[0]), 2))+"," +
+      str(round(variance(gen_gdt_averages[0]), 2))+"," +
+      str(round(variance(hh_tm_averages[0]), 2))+"," +
+      str(round(variance(hh_gdt_averages[0]), 2)))
+print("t2,"+str(round(variance(eigen_tm_averages[1]), 2))+"," +
+      str(round(variance(eigen_gdt_averages[1]), 2))+"," +
+      str(round(variance(gen_tm_averages[1]), 2))+"," +
+      str(round(variance(gen_gdt_averages[1]), 2))+"," +
+      str(round(variance(hh_tm_averages[1]), 2))+"," +
+      str(round(variance(hh_gdt_averages[1]), 2)))
+print("t5,"+str(round(variance(eigen_tm_averages[2]), 2))+"," +
+      str(round(variance(eigen_gdt_averages[2]), 2))+"," +
+      str(round(variance(gen_tm_averages[2]), 2))+"," +
+      str(round(variance(gen_gdt_averages[2]), 2))+"," +
+      str(round(variance(hh_tm_averages[2]), 2))+"," +
+      str(round(variance(hh_gdt_averages[2]), 2)))
+print("t10,"+str(round(variance(eigen_tm_averages[3]), 2))+"," +
+      str(round(variance(eigen_gdt_averages[3]), 2))+"," +
+      str(round(variance(gen_tm_averages[3]), 2))+"," +
+      str(round(variance(gen_gdt_averages[3]), 2))+"," +
+      str(round(variance(hh_tm_averages[3]), 2))+"," +
+      str(round(variance(hh_gdt_averages[3]), 2)))
