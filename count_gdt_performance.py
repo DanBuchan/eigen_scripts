@@ -1,4 +1,3 @@
-Cp
 from __future__ import print_function
 import glob
 import pprint
@@ -6,8 +5,8 @@ import csv
 import re
 from subprocess import Popen, PIPE
 import shlex
-from statistics import mean
-from statistics import variance
+from statistics import median
+from statistics import median
 import sys
 
 
@@ -108,7 +107,7 @@ def average_scores(result_dir, ending):
                     exit_code = process.wait()
                     gdt_result = gdt_re.search(output.decode("utf-8"))
                     gdt_results.append(float(gdt_result.group(1)))
-                    #gdt_results.append(float(gdt_result.group(1))/fasta_length)
+                    # gdt_results.append(float(gdt_result.group(1))/fasta_length)
                 except:
                     eprint("COULD NOT RUN maxcluster")
 
@@ -118,20 +117,20 @@ def average_scores(result_dir, ending):
             if len(tm_results) > 0:
                 tm_averages[0].append(tm_results[0])
             if len(tm_results) > 1:
-                tm_averages[1].append(min(tm_results[0:2]))
+                tm_averages[1].append(max(tm_results[0:2]))
             if len(tm_results) > 4:
-                tm_averages[2].append(min(tm_results[0:5]))
+                tm_averages[2].append(max(tm_results[0:5]))
             if len(tm_results) > 9:
-                tm_averages[3].append(min(tm_results))
+                tm_averages[3].append(max(tm_results))
 
             if len(gdt_results) > 0:
                 gdt_averages[0].append(gdt_results[0])
             if len(gdt_results) > 1:
-                gdt_averages[1].append(min(gdt_results[0:2]))
+                gdt_averages[1].append(max(gdt_results[0:2]))
             if len(gdt_results) > 4:
-                gdt_averages[2].append(min(gdt_results[0:5]))
+                gdt_averages[2].append(max(gdt_results[0:5]))
             if len(gdt_results) > 9:
-                gdt_averages[3].append(min(gdt_results))
+                gdt_averages[3].append(max(gdt_results))
         # break
 
     return(tm_averages, gdt_averages)
@@ -145,57 +144,57 @@ def average_scores(result_dir, ending):
 
 # print(hh_tm_averages)
 # print(hh_gdt_averages)
-print("level,eigen_average_tm,eigen_average_gdt,"
-      "gen_average_tm,gen_average_gdt,hh_average_tm,hh_average_gdt")
-print("t1,"+str(round(mean(eigen_tm_averages[0]), 2))+"," +
-      str(round(mean(eigen_gdt_averages[0]), 2))+"," +
-      str(round(mean(gen_tm_averages[0]), 2))+"," +
-      str(round(mean(gen_gdt_averages[0]), 2))+"," +
-      str(round(mean(hh_tm_averages[0]), 2))+"," +
-      str(round(mean(hh_gdt_averages[0]), 2)))
-print("t2,"+str(round(mean(eigen_tm_averages[1]), 2))+"," +
-      str(round(mean(eigen_gdt_averages[1]), 2))+"," +
-      str(round(mean(gen_tm_averages[1]), 2))+"," +
-      str(round(mean(gen_gdt_averages[1]), 2))+"," +
-      str(round(mean(hh_tm_averages[1]), 2))+"," +
-      str(round(mean(hh_gdt_averages[1]), 2)))
-print("t5,"+str(round(mean(eigen_tm_averages[2]), 2))+"," +
-      str(round(mean(eigen_gdt_averages[2]), 2))+"," +
-      str(round(mean(gen_tm_averages[2]), 2))+"," +
-      str(round(mean(gen_gdt_averages[2]), 2))+"," +
-      str(round(mean(hh_tm_averages[2]), 2))+"," +
-      str(round(mean(hh_gdt_averages[2]), 2)))
-print("t10,"+str(round(mean(eigen_tm_averages[3]), 2))+"," +
-      str(round(mean(eigen_gdt_averages[3]), 2))+"," +
-      str(round(mean(gen_tm_averages[3]), 2))+"," +
-      str(round(mean(gen_gdt_averages[3]), 2))+"," +
-      str(round(mean(hh_tm_averages[3]), 2))+"," +
-      str(round(mean(hh_gdt_averages[3]), 2)))
+print("level,eigen_max_tm,eigen_max_gdt,"
+      "gen_max_tm,gen_max_gdt,hh_max_tm,hh_max_gdt")
+print("t1,"+str(round(max(eigen_tm_averages[0]), 2))+"," +
+      str(round(max(eigen_gdt_averages[0]), 2))+"," +
+      str(round(max(gen_tm_averages[0]), 2))+"," +
+      str(round(max(gen_gdt_averages[0]), 2))+"," +
+      str(round(max(hh_tm_averages[0]), 2))+"," +
+      str(round(max(hh_gdt_averages[0]), 2)))
+print("t2,"+str(round(max(eigen_tm_averages[1]), 2))+"," +
+      str(round(max(eigen_gdt_averages[1]), 2))+"," +
+      str(round(max(gen_tm_averages[1]), 2))+"," +
+      str(round(max(gen_gdt_averages[1]), 2))+"," +
+      str(round(max(hh_tm_averages[1]), 2))+"," +
+      str(round(max(hh_gdt_averages[1]), 2)))
+print("t5,"+str(round(max(eigen_tm_averages[2]), 2))+"," +
+      str(round(max(eigen_gdt_averages[2]), 2))+"," +
+      str(round(max(gen_tm_averages[2]), 2))+"," +
+      str(round(max(gen_gdt_averages[2]), 2))+"," +
+      str(round(max(hh_tm_averages[2]), 2))+"," +
+      str(round(max(hh_gdt_averages[2]), 2)))
+print("t10,"+str(round(max(eigen_tm_averages[3]), 2))+"," +
+      str(round(max(eigen_gdt_averages[3]), 2))+"," +
+      str(round(max(gen_tm_averages[3]), 2))+"," +
+      str(round(max(gen_gdt_averages[3]), 2))+"," +
+      str(round(max(hh_tm_averages[3]), 2))+"," +
+      str(round(max(hh_gdt_averages[3]), 2)))
 
 
-print("level,eigen_variance_tm,eigen_variance_gdt,"
-      "gen_variance_tm,gen_variance_gdt,hh_variance_tm,hh_variance_gdt")
-print("t1,"+str(round(variance(eigen_tm_averages[0]), 2))+"," +
-      str(round(variance(eigen_gdt_averages[0]), 2))+"," +
-      str(round(variance(gen_tm_averages[0]), 2))+"," +
-      str(round(variance(gen_gdt_averages[0]), 2))+"," +
-      str(round(variance(hh_tm_averages[0]), 2))+"," +
-      str(round(variance(hh_gdt_averages[0]), 2)))
-print("t2,"+str(round(variance(eigen_tm_averages[1]), 2))+"," +
-      str(round(variance(eigen_gdt_averages[1]), 2))+"," +
-      str(round(variance(gen_tm_averages[1]), 2))+"," +
-      str(round(variance(gen_gdt_averages[1]), 2))+"," +
-      str(round(variance(hh_tm_averages[1]), 2))+"," +
-      str(round(variance(hh_gdt_averages[1]), 2)))
-print("t5,"+str(round(variance(eigen_tm_averages[2]), 2))+"," +
-      str(round(variance(eigen_gdt_averages[2]), 2))+"," +
-      str(round(variance(gen_tm_averages[2]), 2))+"," +
-      str(round(variance(gen_gdt_averages[2]), 2))+"," +
-      str(round(variance(hh_tm_averages[2]), 2))+"," +
-      str(round(variance(hh_gdt_averages[2]), 2)))
-print("t10,"+str(round(variance(eigen_tm_averages[3]), 2))+"," +
-      str(round(variance(eigen_gdt_averages[3]), 2))+"," +
-      str(round(variance(gen_tm_averages[3]), 2))+"," +
-      str(round(variance(gen_gdt_averages[3]), 2))+"," +
-      str(round(variance(hh_tm_averages[3]), 2))+"," +
-      str(round(variance(hh_gdt_averages[3]), 2)))
+print("level,eigen_median_tm,eigen_median_gdt,"
+      "gen_median_tm,gen_median_gdt,hh_median_tm,hh_median_gdt")
+print("t1,"+str(round(median(eigen_tm_averages[0]), 2))+"," +
+      str(round(median(eigen_gdt_averages[0]), 2))+"," +
+      str(round(median(gen_tm_averages[0]), 2))+"," +
+      str(round(median(gen_gdt_averages[0]), 2))+"," +
+      str(round(median(hh_tm_averages[0]), 2))+"," +
+      str(round(median(hh_gdt_averages[0]), 2)))
+print("t2,"+str(round(median(eigen_tm_averages[1]), 2))+"," +
+      str(round(median(eigen_gdt_averages[1]), 2))+"," +
+      str(round(median(gen_tm_averages[1]), 2))+"," +
+      str(round(median(gen_gdt_averages[1]), 2))+"," +
+      str(round(median(hh_tm_averages[1]), 2))+"," +
+      str(round(median(hh_gdt_averages[1]), 2)))
+print("t5,"+str(round(median(eigen_tm_averages[2]), 2))+"," +
+      str(round(median(eigen_gdt_averages[2]), 2))+"," +
+      str(round(median(gen_tm_averages[2]), 2))+"," +
+      str(round(median(gen_gdt_averages[2]), 2))+"," +
+      str(round(median(hh_tm_averages[2]), 2))+"," +
+      str(round(median(hh_gdt_averages[2]), 2)))
+print("t10,"+str(round(median(eigen_tm_averages[3]), 2))+"," +
+      str(round(median(eigen_gdt_averages[3]), 2))+"," +
+      str(round(median(gen_tm_averages[3]), 2))+"," +
+      str(round(median(gen_gdt_averages[3]), 2))+"," +
+      str(round(median(hh_tm_averages[3]), 2))+"," +
+      str(round(median(hh_gdt_averages[3]), 2)))

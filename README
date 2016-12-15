@@ -94,7 +94,7 @@ Check graphs and then run optimised eigenthreader!!!!
                                   for each method
 
 16) count_gdt_perfomance.py - takes the genth, hhsearch and optimal eig models and
-                            calculates the modelling performance
+                            calculates the min modelling performance and variance
 
 17) draw_comparison.R - create barchart of the fold recognition comparison performance
 
