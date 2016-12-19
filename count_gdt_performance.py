@@ -27,14 +27,21 @@ benchmark_models = "/mnt/bioinf/archive0/" \
                    "eigen_thread/eigenthreader/structures/"
 
 
-def getFastaLength(file):
-    with open(file) as fasta_file:
-        for line in fasta_file:
-            if ">" in line:
-                continue
-            else:
-                return(len(line.rstrip()))
+# def getFastaLength(file):
+#     with open(file) as fasta_file:
+#         for line in fasta_file:
+#             if ">" in line:
+#                 continue
+#             else:
+#                 return(len(line.rstrip()))
 
+def read_missing(file):
+    missing_things = []
+    with open(file) as missing_file:
+        for line in missing_file:
+            line = line.rstrip()
+            missing_things.append(line)
+    return(missing_things)
 
 def average_scores(result_dir, ending):
 
@@ -48,8 +55,11 @@ def average_scores(result_dir, ending):
         models_dir = "/mnt/bioinf/archive0/" \
                      "eigen_thread/results/hhresults/models/"
 
-    tm_pattern = "\nTM-score=\s+(.+?)\s+\("
-    gdt_pattern = "\nGDT=\s+(.+)"
+    missing_things = read_missing("/home/dbuchan/Code/eigen_scripts/"
+                                  "missing_hh_models.txt")
+
+    tm_pattern = "TM-Score\s=\s(.+?)\sRMSD"
+    gdt_pattern = "GDT-TS\s=\s(.+)\sTM"
     tm_re = re.compile(tm_pattern)
     gdt_re = re.compile(gdt_pattern)
 
@@ -57,17 +67,19 @@ def average_scores(result_dir, ending):
     gdt_averages = [[], [], [], []]
     pdb_id = ''
     for file in glob.glob(result_dir+ending):
-        # if "3dqgA" not in file:
-        #     continue
-
         if "eigentop" in ending or "genthtop" in ending:
             pdb_id = file[-14:-9]
         else:
             pdb_id = file[-11:-6]
-        fasta_file = "/mnt/bioinf/archive0/" \
-                     "eigen_thread/eigenthreader/seq_files/"+pdb_id+".fasta"
-        fasta_length = getFastaLength(fasta_file)
+        # fasta_file = "/mnt/bioinf/archive0/" \
+        #              "eigen_thread/eigenthreader/seq_files/"+pdb_id+".fasta"
+        #fasta_length = getFastaLength(fasta_file)
         #print(pdb_id)
+        if pdb_id in missing_things:
+            print("MISSING")
+            continue
+        # print(pdb_id)
+        # continue
         eprint(file)
         with open(file) as scop_list_file:
             reader = csv.reader(skip_comments(scop_list_file), delimiter=',',
@@ -81,35 +93,36 @@ def average_scores(result_dir, ending):
                 native_struct = pdb_id.upper()[0:4]+"_"+pdb_id.upper()[4:5]+".pdb"
                 eprint(benchmark_models+native_struct)
                 eprint(models_dir+model)
-                try:
-                    cmd = "/home/dbuchan/bin/TMalign " + \
-                        models_dir+model+" " + \
-                        benchmark_models+native_struct
-                    eprint(cmd)
-                    process = Popen(shlex.split(cmd), stdout=PIPE)
-                    (output, err) = process.communicate()
-                    #print(output.decode("utf-8"))
-                    exit_code = process.wait()
-                    tm_result = tm_re.search(output.decode("utf-8"))
-                    tm_results.append(float(tm_result.group(1)))
-                except:
-                    eprint("COULD NOT RUN TMalign")
+                # try:
+                #     cmd = "/home/dbuchan/bin/TMalign " + \
+                #         models_dir+model+" " + \
+                #         benchmark_models+native_struct
+                #     eprint(cmd)
+                #     process = Popen(shlex.split(cmd), stdout=PIPE)
+                #     (output, err) = process.communicate()
+                #     #print(output.decode("utf-8"))
+                #     exit_code = process.wait()
+                #     tm_result = tm_re.search(output.decode("utf-8"))
+                #     tm_results.append(float(tm_result.group(1)))
+                # except:
+                #     eprint("COULD NOT RUN TMalign")
 
-
                 try:
-                    cmd = "/home/dbuchan/bin/maxcluster64bit" + \
-                        " -e "+models_dir+model + \
-                        " -p "+benchmark_models+native_struct + \
-                        " -in -gdt"
+                    cmd = "/home/dbuchan/bin/gdtlist " + \
+                          benchmark_models+native_struct + \
+                          " "+models_dir+model
                     eprint(cmd)
                     process = Popen(shlex.split(cmd), stdout=PIPE)
                     (output, err) = process.communicate()
                     exit_code = process.wait()
                     gdt_result = gdt_re.search(output.decode("utf-8"))
                     gdt_results.append(float(gdt_result.group(1)))
-                    # gdt_results.append(float(gdt_result.group(1))/fasta_length)
-                except:
-                    eprint("COULD NOT RUN maxcluster")
+                    tm_result = tm_re.search(output.decode("utf-8"))
+                    tm_results.append(float(tm_result.group(1)))
+                except Exception as e:
+                    eprint("COULD NOT RUN gdtlist")
+                    eprint(str(e))
+            #exit()
 
             # print(tm_results)
             # print(gdt_results)
