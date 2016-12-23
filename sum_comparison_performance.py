@@ -47,7 +47,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
 
     # print(result_dir+"*."+file_ending)
     for file in glob.glob(result_dir+"*."+file_ending):
-        # print(file)
+        print(file)
         counts = {}
         # print(file[-9:])
         result_count = 0
