@@ -66,8 +66,8 @@ def parse_eigen(omit_from_results_set, scop_list, bench_membership):
         pdb_id = pdb+chain
         print(pdb_id)
         if pdb_id in bench_membership:
-            print(result_dir+"processed_comparison_superfamily/"+pdb_id+".eigentop")
-            out = open(result_dir+"processed_comparison_superfamily/"+pdb_id+".eigentop",
+            print(result_dir+"processed_comparison/"+pdb_id+".eigentop")
+            out = open(result_dir+"processed_comparison/"+pdb_id+".eigentop",
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
@@ -131,8 +131,8 @@ def parse_hh(omit_from_results_set, scop_list, bench_membership):
         print(pdb_id)
         parse_ctl = False
         if pdb_id in bench_membership:
-            print(result_dir+"processed_comparison_superfamily/"+pdb_id+".hhtop")
-            out = open(result_dir+"processed_comparison_superfamily/"+pdb_id+".hhtop", "w+")
+            print(result_dir+"processed_comparison/"+pdb_id+".hhtop")
+            out = open(result_dir+"processed_comparison/"+pdb_id+".hhtop", "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
             out.write("# SCOP FAMILY: "+bench_membership[pdb_id]+"\n")
@@ -219,8 +219,8 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         pdb_id = pdb+chain
         print(pdb_id)
         if pdb_id in bench_membership:
-            print(result_dir+"processed_comparison_superfamily/"+pdb_id+".genthtop")
-            out = open(result_dir+"processed_comparison_superfamily/"+pdb_id+".genthtop",
+            print(result_dir+"processed_comparison/"+pdb_id+".genthtop")
+            out = open(result_dir+"processed_comparison/"+pdb_id+".genthtop",
                        "w+")
             out.write("# PDB ID: "+pdb_id+"\n")
             scop_class = bench_membership[pdb_id]
