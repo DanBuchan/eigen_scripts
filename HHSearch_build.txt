@@ -19,8 +19,7 @@
 #run the hhm vs hhm HHSearches
 > for i in `ls /scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/seq_files/ | sed -e 's/\.fasta//'`; do hhblits -i /scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/seq_files/$i.fasta -oa3m /scratch0/NOT_BACKED_UP/dbuchan/hhresults/hhblits_corrected/$i.a3m -d uniprot20_2013_03; done
 #Then run HHSearch with these profiles against the Structure db
-> for i in `ls /scratch0/NOT_BACKED_UP/dbuchan/hhresults/hhblits_corrected/*.a3m | sed -e 's/\.a3m//'`; do hhsearch -B 99999999 -Z 99999999 -p 0 -E 1E+10 -cpu 6 -i $i.a3m -o $i.hhr -d scop70_1.75; done
-
+> for i in `ls /scratch0/NOT_BACKED_UP/dbuchan/hhresults/hhblits_corrected/*.a3m | sed -e 's/\.a3m//'`; do hhsearch -B 99999999 -Z 99999999 -p 0 -E 1E+10 -cpu 10 -i $i.a3m -o $i.hhr -d scop70_1.75; done
 
 #Retrieve the pdbs for scop 1.75 that weren't in our local PDB copy as they had
 #been deprecated
