@@ -13,7 +13,7 @@ pp = pprint.PrettyPrinter(indent=4)
 def process_results(t1_results, t2_results, t5_results, t10_results,
                     file_ending):
     result_dir = "/mnt/bioinf/archive0/" \
-                 "eigen_thread/results/processed_comparison/"
+                 "eigen_thread/results/processed_comparison_family/"
     pdb_pattern = r"#\sPDB\sID:\s(.+)"
     scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
     result_pattern = r".+,.+,.+"
@@ -47,7 +47,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
 
     # print(result_dir+"*."+file_ending)
     for file in glob.glob(result_dir+"*."+file_ending):
-        print(file)
+        # print(file)
         counts = {}
         # print(file[-9:])
         result_count = 0
