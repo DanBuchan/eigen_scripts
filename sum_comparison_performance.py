@@ -30,7 +30,7 @@ superfamily_removal_set = ['1ej0A', '1ne2A', '1i4jA', '1gbsA', '5ptpA',
                            '1whiA', '1im5A', '1kq6A', '1tqhA']
 
 def process_results(t1_results, t2_results, t5_results, t10_results,
-                    file_ending, result_dir):
+                    file_ending, result_dir, removal_set):
     pdb_pattern = r"#\sPDB\sID:\s(.+)"
     scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
     result_pattern = r".+,.+,.+"
@@ -64,7 +64,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
 
     # print(result_dir+"*."+file_ending)
     for file in glob.glob(result_dir+"*."+file_ending):
-        # print(file)
+        print(file)
         counts = {}
         # print(file[-9:])
         result_count = 0
@@ -183,7 +183,7 @@ def print_counts(top, data):
     print(output_line.rstrip())
 
 
-def process_data_set(result_dir):
+def process_data_set(result_dir, removal_set):
 
     t1_results = defaultdict(dict)
     t2_results = defaultdict(dict)
@@ -195,19 +195,24 @@ def process_data_set(result_dir):
                                                                       t10_results,
                                                                       "eigentop",
                                                                       result_dir,
+                                                                      removal_set,
                                                                       )
     t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
                                                                       t2_results,
                                                                       t5_results,
                                                                       t10_results,
                                                                       "hhtop",
-                                                                      result_dir)
+                                                                      result_dir,
+                                                                      removal_set,
+                                                                      )
     t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
                                                                       t2_results,
                                                                       t5_results,
                                                                       t10_results,
                                                                       "genthtop",
-                                                                      result_dir)
+                                                                      result_dir,
+                                                                      removal_set,
+                                                                      )
     # pp.pprint(t1_results)
 
     print("top,vectors,class,fold,superf,family")
@@ -216,5 +221,5 @@ def process_data_set(result_dir):
     print_counts("5", t5_results)
     print_counts("10", t10_results)
 
-process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_family/")
-process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_superfamily/")
+process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_family/", family_removal_set)
+process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_superfamily/", superfamily_removal_set)
