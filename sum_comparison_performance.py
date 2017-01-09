@@ -65,6 +65,10 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
     # print(result_dir+"*."+file_ending)
     for file in glob.glob(result_dir+"*."+file_ending):
         print(file)
+        pdb = file.rsplit('/', 1)[-1][0:5]
+        print(pdb)
+        if pdb in removal_set:
+            continue
         counts = {}
         # print(file[-9:])
         result_count = 0
@@ -169,6 +173,11 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
             t10_results[param]["family"] += 1
 
         # break
+        print(len(t1_results))
+        print(len(t2_results))
+        print(len(t5_results))
+        print(len(t10_results))
+
     return(t1_results, t2_results, t5_results, t10_results)
 
 def print_counts(top, data):
