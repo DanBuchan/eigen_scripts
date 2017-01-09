@@ -3,18 +3,49 @@ import pprint
 import csv
 import re
 
+# family_removal_set = ['1i4jA', '1j3aA', '1chdA', '1dmgA', '1mk0A', '1wjxA',
+#                       '1jkxA', '1lm4A', '1g2rA', '1k6kA', '1fcyA', '3dqgA',
+#                       '1xkrA', '1dixA', '1nrvA', '1hxnA', '1dbxA', '1whiA',
+#                       '1im5A', '1kq6A']
+# superfamily_removal_set = ['1ej0A', '1ne2A', '1i4jA', '1gbsA', '5ptpA',
+#                            '1xdzA', '1a3aA', '1k7jA', '1j3aA', '1fk5A',
+#                            '1aoeA', '1behA', '1kqrA', '1i58A', '1chdA',
+#                            '3borA', '1iwdA', '1dmgA', '1mk0A', '1npsA',
+#                            '1gzcA', '1htwA', '1wjxA', '1ktgA', '1i1nA',
+#                            '1jkxA', '1g9oA', '2hs1A', '1jbkA', '1ql0A',
+#                            '1lm4A', '1g2rA', '1atzA', '1f6bA', '1gz2A',
+#                            '1i71A', '1k6kA', '1bebA', '1hdoA', '1fcyA',
+#                            '3dqgA', '1fqtA', '1dsxA', '1jyhA', '1h2eA',
+#                            '1cxyA', '1xkrA', '1vhuA', '1d4oA', '1dixA',
+#                            '1nrvA', '1vfyA', '1lo7A', '1hxnA', '1ckeA',
+#                            '1cjwA', '1c44A', '1wkcA', '1qf9A', '1dbxA',
+#                            '1tzvA', '1h0pA', '1c52A', '1aapA', '1ctfA',
+#                            '1gmxA', '1bsgA', '1ek0A', '1ihzA', '1mugA',
+#                            '1whiA', '1im5A', '1kq6A', '1tqhA']
 pp = pprint.PrettyPrinter(indent=4)
 
-omit_from_results_set = {}
-omit_from_results_set_pdb = {}
+def readOmitList(file):
+    omit_from_results_set = {}
+    omit_from_results_set_pdb = {}
+    with open(file) as non_redundant:
+        for line in non_redundant:
+            line = line.rstrip()
+            omit_from_results_set[line] = 1
+            omit_from_results_set_pdb[line[1:5]+line[5:6].upper()] = 1
+    return(omit_from_results_set, omit_from_results_set_pdb)
 
-with open("/mnt/bioinf/archive0/eigen_thread/"
-          "scop_data/non_redundant_list_family_level.txt") as non_redundant:
-    for line in non_redundant:
-        line = line.rstrip()
-        omit_from_results_set[line] = 1
-        omit_from_results_set_pdb[line[1:5]+line[5:6].upper()] = 1
 
+(omit_from_results_set,
+ omit_from_results_set_pdb) = readOmitList("/mnt/bioinf/archive0/"
+                                                  "eigen_thread/scop_data/"
+                                                  "non_redundant_list_family"
+                                                  "_level.txt")
+(superfamily_omit_from_results_set,
+ superfamily_omit_from_results_set_pdb) = readOmitList("/mnt/bioinf/archive0/"
+                                                       "eigen_thread/"
+                                                       "scop_data/"
+                                                       "non_redundant_list_"
+                                                       "superfamily_level.txt")
 # pp.pprint(omit_from_results_set_pdb)
 # exit()
 
@@ -48,9 +79,6 @@ with open('/mnt/bioinf/archive0/eigen_thread/'
         bench_membership[row[0]] = row[1]
 
 # pp.pprint(bench_membership)
-
-# Parse eigenresults
-
 
 def parse_eigen(omit_from_results_set, scop_list, bench_membership):
     result_dir = "/scratch0/NOT_BACKED_UP/dbuchan/eigen_benchmark/results/"
@@ -262,9 +290,10 @@ def parse_genth(omit_from_results_set_pbd, pdb_list, bench_membership):
         #        pp.pprint(element)
         else:
             continue
-        #break
+        # break
+
 
 parse_eigen(omit_from_results_set, scop_list, bench_membership)
-#exit()
+# exit()
 parse_hh(omit_from_results_set, scop_list, bench_membership)
 parse_genth(omit_from_results_set_pdb, pdb_list, bench_membership)
