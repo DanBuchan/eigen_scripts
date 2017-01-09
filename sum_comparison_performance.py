@@ -9,11 +9,28 @@ import math
 from collections import defaultdict
 pp = pprint.PrettyPrinter(indent=4)
 
+family_removal_set = ['1i4jA', '1j3aA', '1chdA', '1dmgA', '1mk0A', '1wjxA',
+                      '1jkxA', '1lm4A', '1g2rA', '1k6kA', '1fcyA', '3dqgA',
+                      '1xkrA', '1dixA', '1nrvA', '1hxnA', '1dbxA', '1whiA',
+                      '1im5A', '1kq6A']
+superfamily_removal_set = ['1ej0A', '1ne2A', '1i4jA', '1gbsA', '5ptpA',
+                           '1xdzA', '1a3aA', '1k7jA', '1j3aA', '1fk5A',
+                           '1aoeA', '1behA', '1kqrA', '1i58A', '1chdA',
+                           '3borA', '1iwdA', '1dmgA', '1mk0A', '1npsA',
+                           '1gzcA', '1htwA', '1wjxA', '1ktgA', '1i1nA',
+                           '1jkxA', '1g9oA', '2hs1A', '1jbkA', '1ql0A',
+                           '1lm4A', '1g2rA', '1atzA', '1f6bA', '1gz2A',
+                           '1i71A', '1k6kA', '1bebA', '1hdoA', '1fcyA',
+                           '3dqgA', '1fqtA', '1dsxA', '1jyhA', '1h2eA',
+                           '1cxyA', '1xkrA', '1vhuA', '1d4oA', '1dixA',
+                           '1nrvA', '1vfyA', '1lo7A', '1hxnA', '1ckeA',
+                           '1cjwA', '1c44A', '1wkcA', '1qf9A', '1dbxA',
+                           '1tzvA', '1h0pA', '1c52A', '1aapA', '1ctfA',
+                           '1gmxA', '1bsgA', '1ek0A', '1ihzA', '1mugA',
+                           '1whiA', '1im5A', '1kq6A', '1tqhA']
 
 def process_results(t1_results, t2_results, t5_results, t10_results,
-                    file_ending):
-    result_dir = "/mnt/bioinf/archive0/" \
-                 "eigen_thread/results/processed_comparison_family/"
+                    file_ending, result_dir):
     pdb_pattern = r"#\sPDB\sID:\s(.+)"
     scop_pattern = r"#\sSCOP\sFAMILY:\s(.+)"
     result_pattern = r".+,.+,.+"
@@ -154,29 +171,6 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
         # break
     return(t1_results, t2_results, t5_results, t10_results)
 
-
-t1_results = defaultdict(dict)
-t2_results = defaultdict(dict)
-t5_results = defaultdict(dict)
-t10_results = defaultdict(dict)
-t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
-                                                                  t2_results,
-                                                                  t5_results,
-                                                                  t10_results,
-                                                                  "eigentop")
-t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
-                                                                  t2_results,
-                                                                  t5_results,
-                                                                  t10_results,
-                                                                  "hhtop")
-t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
-                                                                  t2_results,
-                                                                  t5_results,
-                                                                  t10_results,
-                                                                  "genthtop")
-# pp.pprint(t1_results)
-
-
 def print_counts(top, data):
     output_line = ''
     for vect_count in sorted(data.items()):
@@ -187,8 +181,40 @@ def print_counts(top, data):
         output_line += str(round(float(vect_count[1]["family"])/150, 3))
         output_line += "\n"
     print(output_line.rstrip())
-print("top,vectors,class,fold,superf,family")
-print_counts("1", t1_results)
-print_counts("2", t2_results)
-print_counts("5", t5_results)
-print_counts("10", t10_results)
+
+
+def process_data_set(result_dir):
+
+    t1_results = defaultdict(dict)
+    t2_results = defaultdict(dict)
+    t5_results = defaultdict(dict)
+    t10_results = defaultdict(dict)
+    t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
+                                                                      t2_results,
+                                                                      t5_results,
+                                                                      t10_results,
+                                                                      "eigentop",
+                                                                      result_dir,
+                                                                      )
+    t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
+                                                                      t2_results,
+                                                                      t5_results,
+                                                                      t10_results,
+                                                                      "hhtop",
+                                                                      result_dir)
+    t1_results, t2_results, t5_results, t10_results = process_results(t1_results,
+                                                                      t2_results,
+                                                                      t5_results,
+                                                                      t10_results,
+                                                                      "genthtop",
+                                                                      result_dir)
+    # pp.pprint(t1_results)
+
+    print("top,vectors,class,fold,superf,family")
+    print_counts("1", t1_results)
+    print_counts("2", t2_results)
+    print_counts("5", t5_results)
+    print_counts("10", t10_results)
+
+process_data_set("eigen_thread/results/processed_comparison_family/")
+process_data_set("eigen_thread/results/processed_comparison_superfamily/")
