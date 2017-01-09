@@ -178,7 +178,7 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
 
 def print_counts(top, data, removal_set):
     output_line = ''
-    denominator = 150 = len(removal_set)
+    denominator = 150 - len(removal_set)
     for vect_count in sorted(data.items()):
         output_line += top+","+str(vect_count[0])+","
         output_line += str(round(float(vect_count[1]["class"])/denominator, 3))+","
