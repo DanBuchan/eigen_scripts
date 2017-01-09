@@ -173,21 +173,18 @@ def process_results(t1_results, t2_results, t5_results, t10_results,
             t10_results[param]["family"] += 1
 
         # break
-        print(len(t1_results))
-        print(len(t2_results))
-        print(len(t5_results))
-        print(len(t10_results))
 
     return(t1_results, t2_results, t5_results, t10_results)
 
-def print_counts(top, data):
+def print_counts(top, data, removal_set):
     output_line = ''
+    denominator = 150 = len(removal_set)
     for vect_count in sorted(data.items()):
         output_line += top+","+str(vect_count[0])+","
-        output_line += str(round(float(vect_count[1]["class"])/150, 3))+","
-        output_line += str(round(float(vect_count[1]["fold"])/150, 3))+","
-        output_line += str(round(float(vect_count[1]["superf"])/150, 3))+","
-        output_line += str(round(float(vect_count[1]["family"])/150, 3))
+        output_line += str(round(float(vect_count[1]["class"])/denominator, 3))+","
+        output_line += str(round(float(vect_count[1]["fold"])/denominator, 3))+","
+        output_line += str(round(float(vect_count[1]["superf"])/denominator, 3))+","
+        output_line += str(round(float(vect_count[1]["family"])/denominator, 3))
         output_line += "\n"
     print(output_line.rstrip())
 
@@ -225,10 +222,10 @@ def process_data_set(result_dir, removal_set):
     # pp.pprint(t1_results)
 
     print("top,vectors,class,fold,superf,family")
-    print_counts("1", t1_results)
-    print_counts("2", t2_results)
-    print_counts("5", t5_results)
-    print_counts("10", t10_results)
+    print_counts("1", t1_results, removal_set)
+    print_counts("2", t2_results, removal_set)
+    print_counts("5", t5_results, removal_set)
+    print_counts("10", t10_results, removal_set)
 
 process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_family/", family_removal_set)
 #process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_superfamily/", superfamily_removal_set)
