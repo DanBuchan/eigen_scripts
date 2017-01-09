@@ -222,4 +222,4 @@ def process_data_set(result_dir, removal_set):
     print_counts("10", t10_results)
 
 process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_family/", family_removal_set)
-process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_superfamily/", superfamily_removal_set)
+#process_data_set("/mnt/bioinf/archive0/eigen_thread/results/processed_comparison_superfamily/", superfamily_removal_set)
