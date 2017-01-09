@@ -63,8 +63,11 @@ def calculate_structure_scores(result_dir, ending):
     tm_re = re.compile(tm_pattern)
     gdt_re = re.compile(gdt_pattern)
 
-    tm_scores = defaultdict(list)
-    gdt_scores = defaultdict(list)
+    tm_max_scores = defaultdict(list)
+    gdt_max_scores = defaultdict(list)
+    tm_median_scores = defaultdict(list)
+    gdt_median_scores = defaultdict(list)
+
     pdb_id = ''
     for file in glob.glob(result_dir+ending):
         if "eigentop" in ending or "genthtop" in ending:
@@ -80,7 +83,14 @@ def calculate_structure_scores(result_dir, ending):
             continue
 
         eprint(file)
-
+        t1_tm = defaultdict(list)
+        t2_tm = defaultdict(list)
+        t5_tm = defaultdict(list)
+        t10_tm = defaultdict(list)
+        t1_gdt = defaultdict(list)
+        t2_gdt = defaultdict(list)
+        t5_gdt = defaultdict(list)
+        t10_gdt = defaultdict(list)
         with open(file) as scop_list_file:
             reader = csv.reader(skip_comments(scop_list_file), delimiter=',',
                                 quotechar='"')
@@ -105,20 +115,36 @@ def calculate_structure_scores(result_dir, ending):
                     gdt_result = gdt_re.search(output.decode("utf-8"))
                     tm_result = tm_re.search(output.decode("utf-8"))
                     if line_count == 1:
-                        tm_scores[1].append(float(tm_result.group(1)))
-                        gdt_scores[1].append(float(gdt_result.group(1)))
+                        t1_tm[1].append(float(tm_result.group(1)))
+                        t1_gdt[1].append(float(gdt_result.group(1)))
                     if line_count <= 2:
-                        tm_scores[2].append(float(tm_result.group(1)))
-                        gdt_scores[2].append(float(gdt_result.group(1)))
+                        t2_tm[2].append(float(tm_result.group(1)))
+                        t2_gdt[2].append(float(gdt_result.group(1)))
                     if line_count <= 5:
-                        tm_scores[5].append(float(tm_result.group(1)))
-                        gdt_scores[5].append(float(gdt_result.group(1)))
+                        t5_tm[5].append(float(tm_result.group(1)))
+                        t5_gdt[5].append(float(gdt_result.group(1)))
                     if line_count <= 10:
-                        tm_scores[10].append(float(tm_result.group(1)))
-                        gdt_scores[10].append(float(gdt_result.group(1)))
+                        t10_tm[10].append(float(tm_result.group(1)))
+                        t10_gdt[10].append(float(gdt_result.group(1)))
                 except Exception as e:
                     eprint("COULD NOT RUN gdtlist: ")
                     eprint(str(e))
+        tm_max_scores[1].append(round(max(t1_tm)))
+        tm_median_scores[1].append(round(median(t1_tm)))
+        tm_max_scores[2].append(round(max(t2_tm)))
+        tm_median_scores[2].append(round(median(t2_tm)))
+        tm_max_scores[5].append(round(max(t5_tm)))
+        tm_median_scores[5].append(round(median(t5_tm)))
+        tm_max_scores[10].append(round(max(t10_tm)))
+        tm_median_scores[10].append(round(median(t10_tm)))
+        gdt_max_scores[1].append(round(max(t1_gdt)))
+        gdt_median_scores[1].append(round(median(t1_gdt)))
+        gdt_max_scores[2].append(round(max(t2_gdt)))
+        gdt_median_scores[2].append(round(median(t2_gdt)))
+        gdt_max_scores[5].append(round(max(t5_gdt)))
+        gdt_median_scores[5].append(round(median(t5_gdt)))
+        gdt_max_scores[10].append(round(max(t10_gdt)))
+        gdt_median_scores[10].append(round(median(t10_gdt)))
 
     return(tm_scores, gdt_scores)
 # (e    igen_tm_averages, eigen_gdt_averages) = average_scores(result_dir,
