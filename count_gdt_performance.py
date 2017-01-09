@@ -78,50 +78,51 @@ def calculate_structure_scores(result_dir, ending):
         if pdb_id in missing_things:
             print("MISSING")
             continue
-    eprint(file)
 
-    with open(file) as scop_list_file:
-        reader = csv.reader(skip_comments(scop_list_file), delimiter=',',
-                            quotechar='"')
-        line_count = 0
-        for line in reader:
-            if len(line[1]) == 0:
-                continue
-            model = pdb_id+"_"+line[1]+".model.pdb"
-            native_struct = pdb_id.upper()[0:4]+"_"+pdb_id.upper()[4:5]+".pdb"
-            eprint(benchmark_models+native_struct)
-            eprint(models_dir+model)
+        eprint(file)
 
-            try:
-                cmd = "/home/dbuchan/bin/gdtlist " + \
-                      benchmark_models+native_struct + \
-                      " "+models_dir+model
-                eprint(cmd)
-                process = Popen(shlex.split(cmd), stdout=PIPE)
-                (output, err) = process.communicate()
-                exit_code = process.wait()
-                line_count+=1
-                gdt_result = gdt_re.search(output.decode("utf-8"))
-                tm_result = tm_re.search(output.decode("utf-8"))
-                if line_count == 1:
-                    tm_scores[1].append(float(tm_result.group(1)))
-                    gdt_scores[1].append(float(gdt_result.group(1)))
-                if line_count <= 2:
-                    tm_scores[2].append(float(tm_result.group(1)))
-                    gdt_scores[2].append(float(gdt_result.group(1)))
-                if line_count <= 5:
-                    tm_scores[5].append(float(tm_result.group(1)))
-                    gdt_scores[5].append(float(gdt_result.group(1)))
-                if line_count <= 10:
-                    tm_scores[10].append(float(tm_result.group(1)))
-                    gdt_scores[10].append(float(gdt_result.group(1)))
-            except Exception as e:
-                eprint("COULD NOT RUN gdtlist")
-                eprint(str(e))
+        with open(file) as scop_list_file:
+            reader = csv.reader(skip_comments(scop_list_file), delimiter=',',
+                                quotechar='"')
+            line_count = 0
+            for line in reader:
+                if len(line[1]) == 0:
+                    continue
+                model = pdb_id+"_"+line[1]+".model.pdb"
+                native_struct = pdb_id.upper()[0:4]+"_"+pdb_id.upper()[4:5]+".pdb"
+                eprint(benchmark_models+native_struct)
+                eprint(models_dir+model)
+
+                try:
+                    cmd = "/home/dbuchan/bin/gdtlist " + \
+                          benchmark_models+native_struct + \
+                          " "+models_dir+model
+                    eprint(cmd)
+                    process = Popen(shlex.split(cmd), stdout=PIPE)
+                    (output, err) = process.communicate()
+                    exit_code = process.wait()
+                    line_count+=1
+                    gdt_result = gdt_re.search(output.decode("utf-8"))
+                    tm_result = tm_re.search(output.decode("utf-8"))
+                    if line_count == 1:
+                        tm_scores[1].append(float(tm_result.group(1)))
+                        gdt_scores[1].append(float(gdt_result.group(1)))
+                    if line_count <= 2:
+                        tm_scores[2].append(float(tm_result.group(1)))
+                        gdt_scores[2].append(float(gdt_result.group(1)))
+                    if line_count <= 5:
+                        tm_scores[5].append(float(tm_result.group(1)))
+                        gdt_scores[5].append(float(gdt_result.group(1)))
+                    if line_count <= 10:
+                        tm_scores[10].append(float(tm_result.group(1)))
+                        gdt_scores[10].append(float(gdt_result.group(1)))
+                except Exception as e:
+                    eprint("COULD NOT RUN gdtlist: ")
+                    eprint(str(e))
 
     return(tm_scores, gdt_scores)
-# (eigen_tm_averages, eigen_gdt_averages) = average_scores(result_dir,
-#                                                          "*.eigentop")
+# (e    igen_tm_averages, eigen_gdt_averages) = average_scores(result_dir,
+#                                                              "*.eigentop")
 # (gen_tm_averages, gen_gdt_averages) = average_scores(result_dir,
 #                                                      "*.genthtop")
 # (hh_tm_averages, hh_gdt_averages) = average_scores(result_dir,
