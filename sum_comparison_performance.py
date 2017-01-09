@@ -217,4 +217,4 @@ def process_data_set(result_dir):
     print_counts("10", t10_results)
 
 process_data_set("eigen_thread/results/processed_comparison_family/")
-process_data_set("eigen_thread/results/processed_comparison_superfamily/")
+#process_data_set("eigen_thread/results/processed_comparison_superfamily/")
