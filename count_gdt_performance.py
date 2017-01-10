@@ -10,6 +10,19 @@ import sys
 from collections import defaultdict
 
 
+def add_values(key, max_scores, median_scores, values_list):
+    try:
+        max_scores[key].append(round(max(values_list[key]), 3))
+    except Exception as e:
+        eprint("Could not add max values to results")
+        eprint(str(e))
+    try:
+        median_scores[key].append(round(median(values_list[key]), 3))
+    except Exception as e:
+        eprint("Could not add median values to results")
+        eprint(str(e))
+    return(max_scores, median_scores)
+
 def skip_comments(iterable):
     for line in iterable:
         if not line.startswith('#'):
@@ -129,34 +142,39 @@ def calculate_structure_scores(result_dir, ending):
                 except Exception as e:
                     eprint("COULD NOT RUN gdtlist: ")
                     eprint(str(e))
-        tm_max_scores[1].append(round(max(t1_tm)))
-        tm_median_scores[1].append(round(median(t1_tm)))
-        tm_max_scores[2].append(round(max(t2_tm)))
-        tm_median_scores[2].append(round(median(t2_tm)))
-        tm_max_scores[5].append(round(max(t5_tm)))
-        tm_median_scores[5].append(round(median(t5_tm)))
-        tm_max_scores[10].append(round(max(t10_tm)))
-        tm_median_scores[10].append(round(median(t10_tm)))
-        gdt_max_scores[1].append(round(max(t1_gdt)))
-        gdt_median_scores[1].append(round(median(t1_gdt)))
-        gdt_max_scores[2].append(round(max(t2_gdt)))
-        gdt_median_scores[2].append(round(median(t2_gdt)))
-        gdt_max_scores[5].append(round(max(t5_gdt)))
-        gdt_median_scores[5].append(round(median(t5_gdt)))
-        gdt_max_scores[10].append(round(max(t10_gdt)))
-        gdt_median_scores[10].append(round(median(t10_gdt)))
 
-    return(tm_scores, gdt_scores)
-# (e    igen_tm_averages, eigen_gdt_averages) = average_scores(result_dir,
-#                                                              "*.eigentop")
-# (gen_tm_averages, gen_gdt_averages) = average_scores(result_dir,
-#                                                      "*.genthtop")
-# (hh_tm_averages, hh_gdt_averages) = average_scores(result_dir,
-#                                                    "*.hhtop")
+        (tm_max_scores, tm_median_scores) = add_values(1, tm_max_scores,
+                                                       tm_median_scores, t1_tm)
+        (tm_max_scores, tm_median_scores) = add_values(2, tm_max_scores,
+                                                       tm_median_scores, t2_tm)
+        (tm_max_scores, tm_median_scores) = add_values(5, tm_max_scores,
+                                                       tm_median_scores, t5_tm)
+        (tm_max_scores, tm_median_scores) = add_values(10, tm_max_scores,
+                                                       tm_median_scores, t10_tm)
+        (gdt_max_scores, gdt_median_scores) = add_values(1, gdt_max_scores,
+                                                         gdt_median_scores,
+                                                         t1_gdt)
+        (gdt_max_scores, gdt_median_scores) = add_values(2, gdt_max_scores,
+                                                         gdt_median_scores,
+                                                         t2_gdt)
+        (gdt_max_scores, gdt_median_scores) = add_values(5, gdt_max_scores,
+                                                         gdt_median_scores,
+                                                         t5_gdt)
+        (gdt_max_scores, gdt_median_scores) = add_values(10, gdt_max_scores,
+                                                         gdt_median_scores,
+                                                         t10_gdt)
 
-(eigen_tm, eigen_gdt) = calculate_structure_scores(result_dir, "*.eigentop")
-print(eigen_tm)
-print(eigen_gdt)
+    return(tm_max_scores, tm_median_scores, gdt_max_scores, gdt_median_scores)
+
+(eigen_max_tm,
+ eigen_median_tm,
+ eigen_max_gdt,
+ eigen_median_gdt) = calculate_structure_scores(result_dir, "*.eigentop")
+print(eigen_max_tm)
+print(eigen_median_tm)
+print(eigen_max_gdt)
+print(eigen_median_gdt)
+
 # print(hh_tm_averages)
 # print(hh_gdt_averages)
 # print("level,eigen_max_tm,eigen_max_gdt,"
