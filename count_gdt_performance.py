@@ -147,7 +147,7 @@ def calculate_structure_scores(result_dir, ending):
         gdt_median_scores[10].append(round(median(t10_gdt)))
 
     return(tm_scores, gdt_scores)
-# (e    igen_tm_averages, eigen_gdt_averages) = average_scores(result_dir,
+# (eigen_tm_averages, eigen_gdt_averages) = average_scores(result_dir,
 #                                                              "*.eigentop")
 # (gen_tm_averages, gen_gdt_averages) = average_scores(result_dir,
 #                                                      "*.genthtop")
