@@ -170,64 +170,35 @@ def calculate_structure_scores(result_dir, ending):
  eigen_median_tm,
  eigen_max_gdt,
  eigen_median_gdt) = calculate_structure_scores(result_dir, "*.eigentop")
-print(eigen_max_tm)
-print(eigen_median_tm)
-print(eigen_max_gdt)
-print(eigen_median_gdt)
+(gen_max_tm,
+ gen_median_tm,
+ gen_max_gdt,
+ gen_median_gdt) = calculate_structure_scores(result_dir, "*.genthtop")
+(hh_max_tm,
+ hh_median_tm,
+ hh_max_gdt,
+ hh_median_gdt) = calculate_structure_scores(result_dir, "*.hhtop")
 
-# print(hh_tm_averages)
-# print(hh_gdt_averages)
-# print("level,eigen_max_tm,eigen_max_gdt,"
-#       "gen_max_tm,gen_max_gdt,hh_max_tm,hh_max_gdt")
-# print("t1,"+str(round(max(eigen_tm_averages[0]), 2))+"," +
-#       str(round(max(eigen_gdt_averages[0]), 2))+"," +
-#       str(round(max(gen_tm_averages[0]), 2))+"," +
-#       str(round(max(gen_gdt_averages[0]), 2))+"," +
-#       str(round(max(hh_tm_averages[0]), 2))+"," +
-#       str(round(max(hh_gdt_averages[0]), 2)))
-# print("t2,"+str(round(max(eigen_tm_averages[1]), 2))+"," +
-#       str(round(max(eigen_gdt_averages[1]), 2))+"," +
-#       str(round(max(gen_tm_averages[1]), 2))+"," +
-#       str(round(max(gen_gdt_averages[1]), 2))+"," +
-#       str(round(max(hh_tm_averages[1]), 2))+"," +
-#       str(round(max(hh_gdt_averages[1]), 2)))
-# print("t5,"+str(round(max(eigen_tm_averages[2]), 2))+"," +
-#       str(round(max(eigen_gdt_averages[2]), 2))+"," +
-#       str(round(max(gen_tm_averages[2]), 2))+"," +
-#       str(round(max(gen_gdt_averages[2]), 2))+"," +
-#       str(round(max(hh_tm_averages[2]), 2))+"," +
-#       str(round(max(hh_gdt_averages[2]), 2)))
-# print("t10,"+str(round(max(eigen_tm_averages[3]), 2))+"," +
-#       str(round(max(eigen_gdt_averages[3]), 2))+"," +
-#       str(round(max(gen_tm_averages[3]), 2))+"," +
-#       str(round(max(gen_gdt_averages[3]), 2))+"," +
-#       str(round(max(hh_tm_averages[3]), 2))+"," +
-#       str(round(max(hh_gdt_averages[3]), 2)))
-#
-#
-# print("level,eigen_median_tm,eigen_median_gdt,"
-#       "gen_median_tm,gen_median_gdt,hh_median_tm,hh_median_gdt")
-# print("t1,"+str(round(median(eigen_tm_averages[0]), 2))+"," +
-#       str(round(median(eigen_gdt_averages[0]), 2))+"," +
-#       str(round(median(gen_tm_averages[0]), 2))+"," +
-#       str(round(median(gen_gdt_averages[0]), 2))+"," +
-#       str(round(median(hh_tm_averages[0]), 2))+"," +
-#       str(round(median(hh_gdt_averages[0]), 2)))
-# print("t2,"+str(round(median(eigen_tm_averages[1]), 2))+"," +
-#       str(round(median(eigen_gdt_averages[1]), 2))+"," +
-#       str(round(median(gen_tm_averages[1]), 2))+"," +
-#       str(round(median(gen_gdt_averages[1]), 2))+"," +
-#       str(round(median(hh_tm_averages[1]), 2))+"," +
-#       str(round(median(hh_gdt_averages[1]), 2)))
-# print("t5,"+str(round(median(eigen_tm_averages[2]), 2))+"," +
-#       str(round(median(eigen_gdt_averages[2]), 2))+"," +
-#       str(round(median(gen_tm_averages[2]), 2))+"," +
-#       str(round(median(gen_gdt_averages[2]), 2))+"," +
-#       str(round(median(hh_tm_averages[2]), 2))+"," +
-#       str(round(median(hh_gdt_averages[2]), 2)))
-# print("t10,"+str(round(median(eigen_tm_averages[3]), 2))+"," +
-#       str(round(median(eigen_gdt_averages[3]), 2))+"," +
-#       str(round(median(gen_tm_averages[3]), 2))+"," +
-#       str(round(median(gen_gdt_averages[3]), 2))+"," +
-#       str(round(median(hh_tm_averages[3]), 2))+"," +
-#       str(round(median(hh_gdt_averages[3]), 2)))
+# print(eigen_max_tm)
+# print(eigen_median_tm)
+# print(eigen_max_gdt)
+# print(eigen_median_gdt)
+
+print("tm_level,eigen_max,eigen_median,gen_max,gen_median,hh_max,hh_median")
+for level in sorted(eigen_max_tm):
+    info_str = str(level)+","+str(round(median(eigen_max_tm[level]), 2))
+    info_str += ","+str(round(median(eigen_median_tm[level]), 2))
+    info_str += ","+str(round(median(gen_max_tm[level]), 2))
+    info_str += ","+str(round(median(gen_median_tm[level]), 2))
+    info_str += ","+str(round(median(hh_max_tm[level]), 2))
+    info_str += ","+str(round(median(hh_median_tm[level]), 2))
+    print(info_str)
+print("gdt_level,eigen_max,eigen_median,gen_max,gen_median,hh_max,hh_median")
+for level in sorted(eigen_max_gdt):
+    info_str = str(level)+","+str(round(median(eigen_max_gdt[level]), 2))
+    info_str += ","+str(round(median(eigen_median_gdt[level]), 2))
+    info_str += ","+str(round(median(gen_max_gdt[level]), 2))
+    info_str += ","+str(round(median(gen_median_gdt[level]), 2))
+    info_str += ","+str(round(median(hh_max_gdt[level]), 2))
+    info_str += ","+str(round(median(hh_median_gdt[level]), 2))
+    print(info_str)
