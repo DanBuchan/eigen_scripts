@@ -2,14 +2,14 @@ library(ggplot2)
 require(scales)
 library(Rmisc)
 
-comparison_data <- read.csv(file="/Users/dbuchan/Dropbox/EigenThreader/results/comparison_performance.csv", header=TRUE,  strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
+comparison_data <- read.csv(file="/mnt/bioinf/archive0/eigen_thread/results/comparison_performance.csv", header=TRUE,  strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
 comparison_data$superf<-NULL
 comparison_data$family<-NULL
 colnames(comparison_data)<-c("Top","Method","Class","Fold")
 comparison_data$Top<-as.factor(comparison_data$Top)
 comparison_data$Method<-as.factor(comparison_data$Method)
 
-sf_comparison_data <- read.csv(file="/Users/dbuchan/Dropbox/EigenThreader/results/comparison_performance_superfamily_allowed.csv", header=TRUE,  strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
+sf_comparison_data <- read.csv(file="/mnt/bioinf/archive0/eigen_thread/results/comparison_performance_superfamily_allowed.csv", header=TRUE,  strip.white = TRUE, sep=",",na.strings= c("999", "NA", " ", ""))
 sf_comparison_data$superf<-NULL
 sf_comparison_data$family<-NULL
 colnames(sf_comparison_data)<-c("Top","Method","Class","Fold")
