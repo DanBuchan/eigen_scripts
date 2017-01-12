@@ -143,6 +143,8 @@ def calculate_structure_scores(result_dir, ending):
                     eprint("COULD NOT RUN gdtlist: ")
                     eprint(str(e))
 
+
+
         (tm_max_scores, tm_median_scores) = add_values(1, tm_max_scores,
                                                        tm_median_scores, t1_tm)
         (tm_max_scores, tm_median_scores) = add_values(2, tm_max_scores,
