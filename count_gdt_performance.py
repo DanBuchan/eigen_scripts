@@ -82,6 +82,9 @@ def calculate_structure_scores(result_dir, ending):
     gdt_median_scores = defaultdict(list)
 
     pdb_id = ''
+    tm_t1_scores = {}
+    gdt_t1_scores = {}
+
     for file in glob.glob(result_dir+ending):
         if "eigentop" in ending or "genthtop" in ending:
             pdb_id = file[-14:-9]
@@ -130,6 +133,7 @@ def calculate_structure_scores(result_dir, ending):
                     if line_count == 1:
                         t1_tm[1].append(float(tm_result.group(1)))
                         t1_gdt[1].append(float(gdt_result.group(1)))
+                        tm_t1_scores[pdb_id]=float(tm_result.group(1))
                     if line_count <= 2:
                         t2_tm[2].append(float(tm_result.group(1)))
                         t2_gdt[2].append(float(gdt_result.group(1)))
@@ -142,8 +146,6 @@ def calculate_structure_scores(result_dir, ending):
                 except Exception as e:
                     eprint("COULD NOT RUN gdtlist: ")
                     eprint(str(e))
-
-
 
         (tm_max_scores, tm_median_scores) = add_values(1, tm_max_scores,
                                                        tm_median_scores, t1_tm)
@@ -166,20 +168,24 @@ def calculate_structure_scores(result_dir, ending):
                                                          gdt_median_scores,
                                                          t10_gdt)
 
-    return(tm_max_scores, tm_median_scores, gdt_max_scores, gdt_median_scores)
+    return(tm_max_scores, tm_median_scores, gdt_max_scores, gdt_median_scores,
+           tm_t1_scores)
 
 (eigen_max_tm,
  eigen_median_tm,
  eigen_max_gdt,
- eigen_median_gdt) = calculate_structure_scores(result_dir, "*.eigentop")
+ eigen_median_gdt,
+ eigen_tm_t1_scores) = calculate_structure_scores(result_dir, "*.eigentop")
 (gen_max_tm,
  gen_median_tm,
  gen_max_gdt,
- gen_median_gdt) = calculate_structure_scores(result_dir, "*.genthtop")
+ gen_median_gdt,
+ gen_tm_t1_scores) = calculate_structure_scores(result_dir, "*.genthtop")
 (hh_max_tm,
  hh_median_tm,
  hh_max_gdt,
- hh_median_gdt) = calculate_structure_scores(result_dir, "*.hhtop")
+ hh_median_gdt,
+ hh_tm_t1_scores) = calculate_structure_scores(result_dir, "*.hhtop")
 
 # print(eigen_max_tm)
 # print(eigen_median_tm)
@@ -204,3 +210,11 @@ for level in sorted(eigen_max_gdt):
     info_str += ","+str(round(median(hh_max_gdt[level]), 2))
     info_str += ","+str(round(median(hh_median_gdt[level]), 2))
     print(info_str)
+
+
+for pdb in hh_tm_t1_scores:
+    print(pdb+",hh,"+str(hh_tm_t1_scores[pdb]))
+    try:
+        print(pdb+",eigen,"+str(eigen_tm_t1_scores[pdb]))
+    except:
+        print(pdb+",eigen,-")
